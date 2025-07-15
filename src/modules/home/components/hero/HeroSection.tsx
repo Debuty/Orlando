@@ -51,7 +51,7 @@ const HeroSection: React.FC = () => {
           transition={{ ...textAnimation.transition, delay: 0.3 }}
           className="text-[1.75rem] sm:text-[2rem] md:text-[2.25rem] lg:text-[2.75rem] font-medium mb-6 font-cairo leading-relaxed"
         >
-          مرحبًا بك في منتجع أورلاندو
+          مرحبًا بكم في منتجع أورلاندو
         </motion.h1>
 
         {/* Subtitle with Slide Up + Fade */}
