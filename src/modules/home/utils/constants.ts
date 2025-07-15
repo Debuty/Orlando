@@ -47,7 +47,7 @@ export const HOME_CONTENT = {
         englishName: 'Seaside Villa',
         features: 'With a pool and private garden',
         price: 1800,
-        currency: 'ريال'
+        currency: 'مصري'
       },
       {
         id: 'sea-turquoise',
@@ -55,7 +55,7 @@ export const HOME_CONTENT = {
         englishName: 'Seaside Palace',
         features: 'With sea view and private beach',
         price: 1500,
-        currency: 'ريال'
+        currency: 'مصري'
       },
       {
         id: 'bright-star',
@@ -63,7 +63,7 @@ export const HOME_CONTENT = {
         englishName: '4-Bedroom Villa',
         features: 'With inner courtyard',
         price: 1200,
-        currency: 'ريال'
+        currency: 'مصري'
       }
     ]
   },

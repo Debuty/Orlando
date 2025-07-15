@@ -21,4 +21,33 @@
   .container {
     @apply mx-auto px-4 sm:px-6 lg:px-8;
   }
+
+  /* Custom Card styles */
+  .card-base {
+    @apply bg-white rounded-lg shadow-sm transition-shadow;
+  }
+
+  .card-hover {
+    @apply hover:shadow-md hover:scale-105 transition-all duration-300;
+  }
+
+  /* Custom Button styles */
+  .btn-primary {
+    @apply bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary-hover transition-colors;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary text-white px-6 py-2 rounded-lg hover:bg-secondary-hover transition-colors;
+  }
+}
+
+@layer utilities {
+  /* Custom utilities */
+  .text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .gradient-bg {
+    @apply bg-gradient-to-r from-primary to-secondary;
+  }
 }

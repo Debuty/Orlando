@@ -12,7 +12,7 @@ const FeaturedChaletsSection: React.FC = () => {
       >
         <div className="relative min-h-[600px]">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {HOME_CONTENT.featuredChalets.chalets.map((chalet, index) => (
+            {HOME_CONTENT.featuredChalets.chalets.map((chalet) => (
               <div
                 key={chalet.id}
                 className="relative"
@@ -32,11 +32,11 @@ const FeaturedChaletsSection: React.FC = () => {
                       <h3 className="text-xl font-bold mb-3">{chalet.name}</h3>
                       <p className="text-gray-600">{chalet.features}</p>
                       <div className="flex justify-between items-center mt-4">
-                        <span className="text-xl font-bold text-blue-600">
+                        <span className="text-xl font-bold text-zinc-500">
                           {chalet.price} {chalet.currency}
-                          <span className="text-sm text-gray-500 mr-1">/ليلة</span>
+                          <span className="text-xl font-bold text-zinc-500">/ليلة</span>
                         </span>
-                        <span className="text-yellow-500 font-semibold">عرض التفاصيل</span>
+                        <span className=" text-gray-400 font-semibold">عرض التفاصيل</span>
                       </div>
                     </div>
                   </div>
