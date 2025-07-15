@@ -55,14 +55,14 @@ const HeroSection: React.FC = () => {
         </motion.h1>
 
         {/* Subtitle with Slide Up + Fade */}
-        <motion.p 
+        {/* <motion.p 
           initial={textAnimation.initial}
           animate={textAnimation.animate}
           transition={{ ...textAnimation.transition, delay: 0.5 }}
           className="text-lg sm:text-xl md:text-2xl mb-8 sm:mb-12 text-white/75"
         >
           عطلتك الصيفية تبدأ من هنا
-        </motion.p>
+        </motion.p> */}
         
         {/* Button Container for both buttons */}
         <div className="flex gap-2 sm:gap-4 justify-center">
