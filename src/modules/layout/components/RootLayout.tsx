@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { Header } from './Header/Header';
 import Footer from './Footer/Footer';
 import { setRTL } from '../../shared/utils/rtl';
-// import PerformanceMonitor from '../../shared/components/PerformanceMonitor/PerformanceMonitor';
+import { ScrollToTop } from '../../shared/components/ScrollToTop/ScrollToTop';
 
 const RootLayout = () => {
   useEffect(() => {
@@ -17,7 +17,7 @@ const RootLayout = () => {
         <Outlet />
       </main>
       <Footer />
-      {/* <PerformanceMonitor /> */}
+      <ScrollToTop />
     </div>
   );
 };
