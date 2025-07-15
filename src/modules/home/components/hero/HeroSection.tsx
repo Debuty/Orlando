@@ -21,16 +21,6 @@ const textAnimation: AnimationType = {
   transition: { duration: 0.8 }
 };
 
-const buttonAnimation: AnimationType = {
-  initial: { scale: 0.8, opacity: 0 },
-  animate: { scale: 1, opacity: 1 },
-  transition: { 
-    type: "spring",
-    stiffness: 300,
-    duration: 0.3
-  }
-};
-
 const HeroSection: React.FC = () => {
   const navigate = useNavigate();
 
@@ -59,7 +49,7 @@ const HeroSection: React.FC = () => {
           initial={textAnimation.initial}
           animate={textAnimation.animate}
           transition={{ ...textAnimation.transition, delay: 0.3 }}
-          className="text-6xl font-bold mb-6 font-cairo leading-relaxed"
+          className="text-[1.75rem] sm:text-[2rem] md:text-[2.25rem] lg:text-[2.75rem] font-medium mb-6 font-cairo leading-relaxed"
         >
           مرحبًا بك في منتجع أورلاندو
         </motion.h1>
@@ -69,7 +59,7 @@ const HeroSection: React.FC = () => {
           initial={textAnimation.initial}
           animate={textAnimation.animate}
           transition={{ ...textAnimation.transition, delay: 0.5 }}
-          className="text-2xl mb-12"
+          className="text-2xl mb-12 text-white/75"
         >
           عطلتك الصيفية تبدأ من هنا
         </motion.p>
@@ -77,30 +67,20 @@ const HeroSection: React.FC = () => {
         {/* Button Container for both buttons */}
         <div className="flex gap-4 justify-center">
           {/* Primary Button - Start Browsing */}
-          <motion.button
-            initial={buttonAnimation.initial}
-            animate={buttonAnimation.animate}
-            transition={{ ...buttonAnimation.transition, delay: 0.7 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <button
             onClick={() => handleNavigation('/chalets')}
-            className="bg-[#00B5E2] hover:bg-[#33C3E7] text-white px-8 py-3 rounded-lg text-xl font-bold tracking-wide transition-all duration-200"
+            className="bg-[#00B5E2] hover:bg-[#33C3E7] text-white px-6 py-2 rounded-lg text-xl font-bold tracking-wide transition-all duration-200"
           >
             ابدأ التصفح
-          </motion.button>
+          </button>
 
           {/* Secondary Button - Create Account */}
-          <motion.button
-            initial={buttonAnimation.initial}
-            animate={buttonAnimation.animate}
-            transition={{ ...buttonAnimation.transition, delay: 0.8 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+          <button
             onClick={() => handleNavigation('/signup')}
-            className="bg-transparent border-2 border-[#00B5E2] text-white hover:bg-[#00B5E2] hover:text-white px-8 py-3 rounded-lg text-xl font-bold tracking-wide transition-all duration-200"
+            className="bg-transparent border-2 border-[#00B5E2] text-white hover:bg-[#00B5E2] hover:text-white px-6 py-2 rounded-lg text-xl font-bold tracking-wide transition-all duration-200"
           >
             أنشئ حساب الآن
-          </motion.button>
+          </button>
         </div>
       </div>
     </section>
