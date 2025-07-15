@@ -9,6 +9,15 @@
   "outputDirectory": "dist",
   "framework": "vite",
   "github": {
-    "silent": true
+    "silent": true,
+    "autoAlias": true,
+    "enabled": true,
+    "autoJobCancelation": true
+  },
+  "git": {
+    "deploymentEnabled": {
+      "main": true,
+      "master": true
+    }
   }
 } 
