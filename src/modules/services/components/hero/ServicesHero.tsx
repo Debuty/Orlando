@@ -3,41 +3,27 @@ import { SERVICES_HERO } from '../../utils/constants';
 
 const ServicesHero = () => {
   return (
-    <section className="relative py-20 overflow-hidden bg-[#00B5E2]/5">
-      <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-5xl font-cairo font-bold text-gray-900 mb-6"
-          >
-            {SERVICES_HERO.title}
-          </motion.h1>
-          
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-2xl font-cairo text-gray-700 mb-8"
-          >
-            {SERVICES_HERO.subtitle}
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="text-lg text-gray-600 leading-relaxed"
-          >
-            {SERVICES_HERO.description}
-          </motion.p>
-        </div>
+    <section className="relative h-[500px] bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/images/services-hero.jpg)' }}>
+      <div className="absolute inset-0 bg-black/50" />
+      <div className="relative container mx-auto px-4 h-full flex flex-col items-center justify-center text-center text-white">
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-5xl font-cairo font-bold mb-6"
+        >
+          {SERVICES_HERO.title}
+        </motion.h1>
+        
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="text-xl max-w-2xl"
+        >
+          {SERVICES_HERO.subtitle}
+        </motion.p>
       </div>
-
-      {/* Decorative elements */}
-      <div className="absolute top-0 left-0 w-32 h-32 bg-[#00B5E2]/10 rounded-full -translate-x-1/2 -translate-y-1/2" />
-      <div className="absolute bottom-0 right-0 w-40 h-40 bg-[#00B5E2]/10 rounded-full translate-x-1/2 translate-y-1/2" />
     </section>
   );
 };

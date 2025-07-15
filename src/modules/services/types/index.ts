@@ -3,12 +3,11 @@ export interface Service {
   title: string;
   description: string;
   icon: string;
-  features: string[];
 }
 
-export interface ServiceFeature {
+export interface WhyOrlando {
   id: number;
   title: string;
   description: string;
-  image: string;
+  icon: string;
 } 
