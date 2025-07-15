@@ -5,28 +5,30 @@ const CTASection: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="py-16 bg-gradient-to-br from-blue-600 to-blue-800 text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-3xl font-bold mb-6">
-          هل أنت مستعد لقضاء عطلتك المثالية؟
-        </h2>
-        <p className="text-xl mb-12 max-w-3xl mx-auto">
-          لا تنتظر أكثر، احجز شاليهك الآن واستمتع بتجربة لا مثيل لها في منتجع أورلاندو
-        </p>
-        
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button
-            onClick={() => navigate('/chalets')}
-            className="bg-yellow-500 hover:bg-yellow-600 text-black px-8 py-3 rounded-lg font-bold text-lg transition-colors"
-          >
-            تصفح الشاليهات
-          </button>
-          <button
-            onClick={() => navigate('/signup')}
-            className="bg-white hover:bg-gray-100 text-blue-600 px-8 py-3 rounded-lg font-bold text-lg transition-colors"
-          >
-            أنشئ حسابك الآن
-          </button>
+    <section className="w-full bg-gradient-to-b from-[#00B5E2] to-[#0072BC]">
+      <div className="py-12 text-center">
+        <div className="max-w-2xl mx-auto px-4">
+          <h2 className="text-3xl font-bold text-white mb-4">
+            هل أنت مستعد لقضاء عطلتك المثالية؟
+          </h2>
+          <p className="text-lg text-white mb-8">
+            قم بحجز شاليهك اليوم واستمتع بتجربة لا مثيل لها في منتجع <span className="text-[#00B5E2] font-bold">أورلاندو</span>
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+            <button
+              onClick={() => navigate('/chalets')}
+              className="bg-[#00B5E2] hover:bg-[#33C3E7] text-white px-6 py-2.5 rounded-lg font-bold text-base min-w-[160px] transition-colors duration-300"
+            >
+              تصفح الشاليهات
+            </button>
+            <button
+              onClick={() => navigate('/signup')}
+              className="bg-transparent hover:bg-white/5 text-white px-6 py-2.5 rounded-lg font-bold text-base min-w-[160px] transition-colors duration-300 border border-white/80"
+            >
+              أنشئ حسابك الآن
+            </button>
+          </div>
         </div>
       </div>
     </section>

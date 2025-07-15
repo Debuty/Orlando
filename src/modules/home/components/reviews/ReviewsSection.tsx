@@ -1,4 +1,5 @@
 import React from 'react';
+import SectionContainer from '../shared/SectionContainer';
 
 const reviews = [
   {
@@ -26,13 +27,11 @@ const reviews = [
 
 const ReviewsSection: React.FC = () => {
   return (
-    <section className="py-16 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">آراء عملائنا</h2>
-          <p className="text-gray-600">ماذا يقول عملاؤنا عن تجربتهم معنا</p>
-        </div>
-
+    <div className="bg-gray-50">
+      <SectionContainer
+        title="آراء عملائنا"
+        subtitle="ماذا يقول عملاؤنا عن تجربتهم معنا"
+      >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {reviews.map((review) => (
             <div key={review.id} className="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
@@ -49,8 +48,8 @@ const ReviewsSection: React.FC = () => {
             </div>
           ))}
         </div>
-      </div>
-    </section>
+      </SectionContainer>
+    </div>
   );
 };
 

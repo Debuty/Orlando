@@ -8,14 +8,14 @@ import CTASection from '../components/cta/CTASection';
 
 const HomePage: React.FC = () => {
   return (
-    <main className="min-h-screen">
+    <>
       <HeroSection />
       <WhyOrlandoSection />
       <FeaturedChaletsSection />
       <PromoVideoSection />
       <ReviewsSection />
       <CTASection />
-    </main>
+    </>
   );
 };
 

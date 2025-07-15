@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Header } from './Header/Header';
+import Footer from './Footer/Footer';
 import { setRTL } from '../../shared/utils/rtl';
 // import PerformanceMonitor from '../../shared/components/PerformanceMonitor/PerformanceMonitor';
 
@@ -10,11 +11,12 @@ const RootLayout = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50" dir="rtl">
+    <div className="min-h-screen bg-gray-50 flex flex-col" dir="rtl">
       <Header />
-      <main className="pt-16 mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+      <main className="pt-16 flex-grow">
         <Outlet />
       </main>
+      <Footer />
       {/* <PerformanceMonitor /> */}
     </div>
   );

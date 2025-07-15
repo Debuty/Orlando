@@ -1,8 +1,9 @@
 import React from 'react';
+import SectionContainer from '../shared/SectionContainer';
 
 const PromoVideoSection: React.FC = () => {
   return (
-    <section className="py-16 px-4 md:px-8 lg:px-16 relative overflow-hidden">
+    <div className="relative overflow-hidden">
       {/* Background Pattern */}
       <div 
         className="absolute inset-0 bg-cover bg-center opacity-5"
@@ -11,7 +12,7 @@ const PromoVideoSection: React.FC = () => {
         }}
       />
       
-      <div className="container mx-auto relative z-10">
+      <SectionContainer title="" subtitle="">
         <div className="relative aspect-video bg-gradient-to-r from-blue-900 to-blue-800 rounded-xl overflow-hidden flex items-center justify-center group">
           {/* Video Thumbnail */}
           <div 
@@ -38,8 +39,8 @@ const PromoVideoSection: React.FC = () => {
             </svg>
           </button>
         </div>
-      </div>
-    </section>
+      </SectionContainer>
+    </div>
   );
 };
 
