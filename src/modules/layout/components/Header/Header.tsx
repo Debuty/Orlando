@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Variants } from 'framer-motion';
@@ -59,7 +59,15 @@ export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
 
+  // Handle scroll restoration on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   const handleLinkClick = () => {
+    // Scroll to top immediately when link is clicked
+    window.scrollTo(0, 0);
+    
     // Use a slight delay to allow the animation to complete
     const closeMenu = () => {
       setIsMenuOpen(false);
@@ -68,11 +76,6 @@ export const Header: React.FC = () => {
     // Start animation immediately but delay state change
     setTimeout(closeMenu, 100);
   };
-
-  // Close menu on route change
-  React.useEffect(() => {
-    setIsMenuOpen(false);
-  }, [location]);
 
   const linkClasses = "text-gray-700 hover:text-gray-900 px-3 py-2 font-semibold text-base tracking-wide transition-colors duration-200";
   const mobileLinkClasses = "block w-full px-3 py-2 text-base font-semibold text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md tracking-wide transition-all duration-200";
