@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { useEffect } from 'react';
-import Header from './Header/Header';
+import { Header } from './Header/Header';
 import { setRTL } from '../../shared/utils/rtl';
 // import PerformanceMonitor from '../../shared/components/PerformanceMonitor/PerformanceMonitor';
 
