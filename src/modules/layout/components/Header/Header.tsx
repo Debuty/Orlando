@@ -55,6 +55,49 @@ const menuItemVariants: Variants = {
   }
 };
 
+const MobileNavLink = ({ to, children }: { to: string; children: React.ReactNode }) => {
+  const location = useLocation();
+  const isActive = location.pathname === to;
+
+  return (
+    <motion.div
+      variants={menuItemVariants}
+      className="relative"
+    >
+      <Link
+        to={to}
+        className={`block w-full px-3 py-2 text-base font-semibold rounded-md tracking-wide transition-all duration-200 relative overflow-hidden group
+          ${isActive 
+            ? 'text-[#00B5E2] bg-[#00B5E2]/5' 
+            : 'text-gray-700 hover:text-[#00B5E2]'}`}
+      >
+        <motion.span
+          className="absolute inset-0 bg-[#00B5E2]/5 rounded-md"
+          initial={{ scale: 0, opacity: 0 }}
+          whileHover={{ 
+            scale: 1, 
+            opacity: 1,
+            transition: { duration: 0.2 }
+          }}
+        />
+        <motion.div
+          className="relative z-10"
+          whileHover={{ 
+            x: 10,
+            transition: { 
+              type: "spring",
+              stiffness: 400,
+              damping: 25
+            }
+          }}
+        >
+          {children}
+        </motion.div>
+      </Link>
+    </motion.div>
+  );
+};
+
 export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
@@ -78,7 +121,6 @@ export const Header: React.FC = () => {
   };
 
   const linkClasses = "text-gray-700 hover:text-gray-900 px-3 py-2 font-semibold text-base tracking-wide transition-colors duration-200";
-  const mobileLinkClasses = "block w-full px-3 py-2 text-base font-semibold text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md tracking-wide transition-all duration-200";
 
   return (
     <header className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm shadow-lg z-50">
@@ -170,41 +212,18 @@ export const Header: React.FC = () => {
               variants={menuVariants}
             >
               <motion.div className="px-2 pt-2 pb-3 space-y-1 bg-white rounded-lg mt-2 shadow-lg">
-                <motion.div variants={menuItemVariants}>
-                  <Link to="/" onClick={handleLinkClick} className={mobileLinkClasses}>
-                    الرئيسية
-                  </Link>
-                </motion.div>
-                <motion.div variants={menuItemVariants}>
-                  <Link to="/about" onClick={handleLinkClick} className={mobileLinkClasses}>
-                    عن أورلاندو
-                  </Link>
-                </motion.div>
-                <motion.div variants={menuItemVariants}>
-                  <Link to="/chalets" onClick={handleLinkClick} className={mobileLinkClasses}>
-                    جميع الشاليهات
-                  </Link>
-                </motion.div>
-                <motion.div variants={menuItemVariants}>
-                  <Link to="/services" onClick={handleLinkClick} className={mobileLinkClasses}>
-                    الخدمات
-                  </Link>
-                </motion.div>
-                <motion.div variants={menuItemVariants}>
-                  <Link to="/faq" onClick={handleLinkClick} className={mobileLinkClasses}>
-                    أسئلة شائعة
-                  </Link>
-                </motion.div>
-                <motion.div variants={menuItemVariants}>
-                  <Link to="/contact" onClick={handleLinkClick} className={mobileLinkClasses}>
-                    اتصل بنا
-                  </Link>
-                </motion.div>
+                <MobileNavLink to="/">الرئيسية</MobileNavLink>
+                <MobileNavLink to="/about">عن أورلاندو</MobileNavLink>
+                <MobileNavLink to="/chalets">جميع الشاليهات</MobileNavLink>
+                <MobileNavLink to="/services">الخدمات</MobileNavLink>
+                <MobileNavLink to="/faq">أسئلة شائعة</MobileNavLink>
+                <MobileNavLink to="/contact">اتصل بنا</MobileNavLink>
+                
                 <motion.div variants={menuItemVariants}>
                   <Link
                     to="/signup"
                     onClick={handleLinkClick}
-                    className="block w-full px-3 py-2 text-base font-semibold bg-[#00B5E2] hover:bg-[#33C3E7] text-white rounded-md text-center mt-4 tracking-wide transition-all duration-200"
+                    className="block w-full px-3 py-2 text-base font-semibold bg-[#00B5E2] hover:bg-[#33C3E7] text-white rounded-md text-center mt-4 tracking-wide transition-all duration-200 hover:scale-[1.02] hover:shadow-md"
                   >
                     تسجيل الدخول / إنشاء حساب
                   </Link>
