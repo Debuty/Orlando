@@ -55,7 +55,7 @@ const menuItemVariants: Variants = {
   }
 };
 
-const MobileNavLink = ({ to, children }: { to: string; children: React.ReactNode }) => {
+const MobileNavLink = ({ to, children, onClick }: { to: string; children: React.ReactNode; onClick: () => void }) => {
   const location = useLocation();
   const isActive = location.pathname === to;
 
@@ -66,6 +66,7 @@ const MobileNavLink = ({ to, children }: { to: string; children: React.ReactNode
     >
       <Link
         to={to}
+        onClick={onClick}
         className={`block w-full px-3 py-2 text-base font-semibold rounded-md tracking-wide transition-all duration-200 relative overflow-hidden group
           ${isActive 
             ? 'text-[#00B5E2] bg-[#00B5E2]/5' 
@@ -112,12 +113,7 @@ export const Header: React.FC = () => {
     window.scrollTo(0, 0);
     
     // Use a slight delay to allow the animation to complete
-    const closeMenu = () => {
-      setIsMenuOpen(false);
-    };
-    
-    // Start animation immediately but delay state change
-    setTimeout(closeMenu, 100);
+    setTimeout(() => setIsMenuOpen(false), 100);
   };
 
   const linkClasses = "text-gray-700 hover:text-gray-900 px-3 py-2 font-semibold text-base tracking-wide transition-colors duration-200";
@@ -212,12 +208,12 @@ export const Header: React.FC = () => {
               variants={menuVariants}
             >
               <motion.div className="px-2 pt-2 pb-3 space-y-1 bg-white rounded-lg mt-2 shadow-lg">
-                <MobileNavLink to="/">الرئيسية</MobileNavLink>
-                <MobileNavLink to="/about">عن أورلاندو</MobileNavLink>
-                <MobileNavLink to="/chalets">جميع الشاليهات</MobileNavLink>
-                <MobileNavLink to="/services">الخدمات</MobileNavLink>
-                <MobileNavLink to="/faq">أسئلة شائعة</MobileNavLink>
-                <MobileNavLink to="/contact">اتصل بنا</MobileNavLink>
+                <MobileNavLink to="/" onClick={handleLinkClick}>الرئيسية</MobileNavLink>
+                <MobileNavLink to="/about" onClick={handleLinkClick}>عن أورلاندو</MobileNavLink>
+                <MobileNavLink to="/chalets" onClick={handleLinkClick}>جميع الشاليهات</MobileNavLink>
+                <MobileNavLink to="/services" onClick={handleLinkClick}>الخدمات</MobileNavLink>
+                <MobileNavLink to="/faq" onClick={handleLinkClick}>أسئلة شائعة</MobileNavLink>
+                <MobileNavLink to="/contact" onClick={handleLinkClick}>اتصل بنا</MobileNavLink>
                 
                 <motion.div variants={menuItemVariants}>
                   <Link
