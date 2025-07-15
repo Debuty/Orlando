@@ -48,6 +48,10 @@ const menuItemVariants: Variants = {
 export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const handleLinkClick = () => {
+    setIsMenuOpen(false);
+  };
+
   const linkClasses = "text-gray-700 hover:text-gray-900 px-3 py-2 font-semibold text-base tracking-wide transition-colors duration-200";
   const mobileLinkClasses = "block px-3 py-2 text-base font-semibold text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md tracking-wide transition-all duration-200";
 
@@ -56,7 +60,7 @@ export const Header: React.FC = () => {
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 justify-between items-center">
           {/* Logo */}
-          <Link to="/" className="text-2xl font-bold text-[#00B5E2]">
+          <Link to="/" onClick={handleLinkClick} className="text-2xl font-bold text-[#00B5E2]">
             أورلاندو
           </Link>
 
@@ -98,22 +102,22 @@ export const Header: React.FC = () => {
 
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex space-x-8 space-x-reverse">
-            <Link to="/" className={linkClasses}>
+            <Link to="/" onClick={handleLinkClick} className={linkClasses}>
               الرئيسية
             </Link>
-            <Link to="/about" className={linkClasses}>
+            <Link to="/about" onClick={handleLinkClick} className={linkClasses}>
               عن أورلاندو
             </Link>
-            <Link to="/chalets" className={linkClasses}>
+            <Link to="/chalets" onClick={handleLinkClick} className={linkClasses}>
               جميع الشاليهات
             </Link>
-            <Link to="/services" className={linkClasses}>
+            <Link to="/services" onClick={handleLinkClick} className={linkClasses}>
               الخدمات
             </Link>
-            <Link to="/faq" className={linkClasses}>
+            <Link to="/faq" onClick={handleLinkClick} className={linkClasses}>
               أسئلة شائعة
             </Link>
-            <Link to="/contact" className={linkClasses}>
+            <Link to="/contact" onClick={handleLinkClick} className={linkClasses}>
               اتصل بنا
             </Link>
           </div>
@@ -122,6 +126,7 @@ export const Header: React.FC = () => {
           <div className="hidden md:flex items-center gap-4">
             <Link
               to="/signup"
+              onClick={handleLinkClick}
               className="bg-[#00B5E2] hover:bg-[#33C3E7] text-white px-4 py-2 rounded-lg font-semibold text-base tracking-wide transition-all duration-200"
             >
               تسجيل الدخول / إنشاء حساب
@@ -141,38 +146,39 @@ export const Header: React.FC = () => {
             >
               <motion.div className="px-2 pt-2 pb-3 space-y-1 bg-white rounded-lg mt-2 shadow-lg">
                 <motion.div variants={menuItemVariants}>
-                  <Link to="/" className={mobileLinkClasses}>
+                  <Link to="/" onClick={handleLinkClick} className={mobileLinkClasses}>
                     الرئيسية
                   </Link>
                 </motion.div>
                 <motion.div variants={menuItemVariants}>
-                  <Link to="/about" className={mobileLinkClasses}>
+                  <Link to="/about" onClick={handleLinkClick} className={mobileLinkClasses}>
                     عن أورلاندو
                   </Link>
                 </motion.div>
                 <motion.div variants={menuItemVariants}>
-                  <Link to="/chalets" className={mobileLinkClasses}>
+                  <Link to="/chalets" onClick={handleLinkClick} className={mobileLinkClasses}>
                     جميع الشاليهات
                   </Link>
                 </motion.div>
                 <motion.div variants={menuItemVariants}>
-                  <Link to="/services" className={mobileLinkClasses}>
+                  <Link to="/services" onClick={handleLinkClick} className={mobileLinkClasses}>
                     الخدمات
                   </Link>
                 </motion.div>
                 <motion.div variants={menuItemVariants}>
-                  <Link to="/faq" className={mobileLinkClasses}>
+                  <Link to="/faq" onClick={handleLinkClick} className={mobileLinkClasses}>
                     أسئلة شائعة
                   </Link>
                 </motion.div>
                 <motion.div variants={menuItemVariants}>
-                  <Link to="/contact" className={mobileLinkClasses}>
+                  <Link to="/contact" onClick={handleLinkClick} className={mobileLinkClasses}>
                     اتصل بنا
                   </Link>
                 </motion.div>
                 <motion.div variants={menuItemVariants}>
                   <Link
                     to="/signup"
+                    onClick={handleLinkClick}
                     className="block px-3 py-2 text-base font-semibold bg-[#00B5E2] hover:bg-[#33C3E7] text-white rounded-md text-center mt-4 tracking-wide transition-all duration-200"
                   >
                     تسجيل الدخول / إنشاء حساب
