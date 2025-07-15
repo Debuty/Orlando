@@ -18,6 +18,7 @@ export default {
       },
       fontFamily: {
         sans: ['Noto Sans Arabic', 'sans-serif'],
+        cairo: ['Cairo', 'sans-serif'],
       },
     },
   },

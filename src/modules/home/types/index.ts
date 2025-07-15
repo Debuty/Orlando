@@ -22,7 +22,8 @@ export interface Review {
   id: number;
   name: string;
   title: string;
-  avatar?: string;
+  content: string;
+  avatar: string;
 }
 
 // Button Types

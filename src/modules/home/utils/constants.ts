@@ -75,18 +75,21 @@ export const HOME_CONTENT = {
         id: 1,
         name: 'فاطمة العثمان',
         title: 'الاختيار الأمثل',
+        content: 'قضينا أجمل الأوقات في شاليهات أورلاندو. الخدمة ممتازة والموقع مميز.',
         avatar: '/images/avatar-fatima.jpg'
       },
       {
         id: 2,
         name: 'علي السليمان',
         title: 'تجربة فريدة',
+        content: 'المكان راقي والخدمات متكاملة. سعيد جداً بتجربتي مع أورلاندو.',
         avatar: '/images/avatar-ali.jpg'
       },
       {
         id: 3,
         name: 'ليلى الرحمن',
         title: 'أفضل خدمة',
+        content: 'الإطلالة رائعة والشاليهات نظيفة ومجهزة بالكامل. تجربة تستحق التكرار.',
         avatar: '/images/avatar-layla.jpg'
       }
     ]
