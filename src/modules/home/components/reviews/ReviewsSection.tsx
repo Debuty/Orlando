@@ -42,7 +42,7 @@ const ReviewsSection: React.FC = () => {
                   className="w-20 h-20 rounded-full mb-4 object-cover"
                 />
                 <h3 className="text-xl font-bold mb-2">{review.name}</h3>
-                <p className="text-yellow-500 font-semibold mb-4">{review.title}</p>
+                <p className="text-blue-800 font-semibold mb-4">{review.title}</p>
                 <p className="text-gray-600">{review.content}</p>
               </div>
             </div>
