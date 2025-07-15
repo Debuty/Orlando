@@ -1,14 +1,45 @@
+/* Import fonts from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  /* Default font settings */
   html {
     font-family: 'Noto Sans Arabic', sans-serif;
+    font-weight: 400;
   }
 
   body {
-    @apply antialiased;
+    @apply antialiased text-gray-800;
+  }
+
+  /* Typography scale */
+  h1, .h1 {
+    @apply font-cairo font-bold text-4xl md:text-5xl;
+  }
+
+  h2, .h2 {
+    @apply font-cairo font-semibold text-3xl md:text-4xl;
+  }
+
+  h3, .h3 {
+    @apply font-cairo font-semibold text-2xl md:text-3xl;
+  }
+
+  h4, .h4 {
+    @apply font-cairo font-medium text-xl md:text-2xl;
+  }
+
+  p, .body-text {
+    @apply text-base md:text-lg leading-relaxed;
+  }
+
+  .text-small {
+    @apply text-sm leading-normal;
   }
 
   /* RTL specific styles */
@@ -33,11 +64,11 @@
 
   /* Custom Button styles */
   .btn-primary {
-    @apply bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary-hover transition-colors;
+    @apply bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary-hover transition-colors font-medium;
   }
 
   .btn-secondary {
-    @apply bg-secondary text-white px-6 py-2 rounded-lg hover:bg-secondary-hover transition-colors;
+    @apply bg-secondary text-white px-6 py-2 rounded-lg hover:bg-secondary-hover transition-colors font-medium;
   }
 }
 
@@ -49,5 +80,26 @@
 
   .gradient-bg {
     @apply bg-gradient-to-r from-primary to-secondary;
+  }
+
+  /* Font weight utilities */
+  .font-light {
+    font-weight: 300;
+  }
+  
+  .font-regular {
+    font-weight: 400;
+  }
+  
+  .font-medium {
+    font-weight: 500;
+  }
+  
+  .font-semibold {
+    font-weight: 600;
+  }
+  
+  .font-bold {
+    font-weight: 700;
   }
 }
