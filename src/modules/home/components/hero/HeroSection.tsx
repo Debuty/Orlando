@@ -59,17 +59,17 @@ const HeroSection: React.FC = () => {
           initial={textAnimation.initial}
           animate={textAnimation.animate}
           transition={{ ...textAnimation.transition, delay: 0.5 }}
-          className="text-2xl mb-12 text-white/75"
+          className="text-lg sm:text-xl md:text-2xl mb-8 sm:mb-12 text-white/75"
         >
           عطلتك الصيفية تبدأ من هنا
         </motion.p>
         
         {/* Button Container for both buttons */}
-        <div className="flex gap-4 justify-center">
+        <div className="flex gap-2 sm:gap-4 justify-center">
           {/* Primary Button - Start Browsing */}
           <button
             onClick={() => handleNavigation('/chalets')}
-            className="bg-[#00B5E2] hover:bg-[#33C3E7] text-white px-6 py-2 rounded-lg text-xl font-bold tracking-wide transition-all duration-200"
+            className="bg-[#00B5E2] hover:bg-[#33C3E7] text-white px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 rounded-lg text-base sm:text-lg md:text-xl font-bold tracking-wide transition-all duration-200"
           >
             ابدأ التصفح
           </button>
@@ -77,7 +77,7 @@ const HeroSection: React.FC = () => {
           {/* Secondary Button - Create Account */}
           <button
             onClick={() => handleNavigation('/signup')}
-            className="bg-transparent border-2 border-[#00B5E2] text-white hover:bg-[#00B5E2] hover:text-white px-6 py-2 rounded-lg text-xl font-bold tracking-wide transition-all duration-200"
+            className="bg-transparent border-2 border-[#00B5E2] text-white hover:bg-[#00B5E2] hover:text-white px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 rounded-lg text-base sm:text-lg md:text-xl font-bold tracking-wide transition-all duration-200"
           >
             أنشئ حساب الآن
           </button>
