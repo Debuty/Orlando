@@ -1,10 +1,16 @@
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import { HiOutlineHome, HiOutlineCalendar, HiOutlineCash, HiOutlineChartBar } from "react-icons/hi";
 import StatsCard from "../components/stats/StatsCard";
-import RecentBookings from "../components/bookings/RecentBookings";
-import AlertsList from "../components/alerts/AlertsList";
-import StatisticsCharts from "../components/stats/StatisticsCharts";
 import { mockStats, mockRecentBookings, mockAlerts } from "../utils/mockData";
+
+// Lazy load components
+const RecentBookings = lazy(() => import("../components/bookings/RecentBookings"));
+const AlertsList = lazy(() => import("../components/alerts/AlertsList"));
+const StatisticsCharts = lazy(() => import("../components/stats/StatisticsCharts"));
+
+const LoadingPlaceholder = () => (
+  <div className="w-full h-32 bg-gray-100 rounded-lg animate-pulse" />
+);
 
 const ManagerDashboard = () => {
   const [alerts, setAlerts] = useState(mockAlerts);
@@ -56,17 +62,23 @@ const ManagerDashboard = () => {
       </div>
 
       {/* Statistics Charts */}
-      <StatisticsCharts />
+      <Suspense fallback={<LoadingPlaceholder />}>
+        <StatisticsCharts />
+      </Suspense>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Recent Bookings */}
         <div className="lg:col-span-2">
-          <RecentBookings bookings={mockRecentBookings} />
+          <Suspense fallback={<LoadingPlaceholder />}>
+            <RecentBookings bookings={mockRecentBookings} />
+          </Suspense>
         </div>
 
         {/* Alerts */}
         <div>
-          <AlertsList alerts={alerts} onMarkAsRead={handleMarkAsRead} />
+          <Suspense fallback={<LoadingPlaceholder />}>
+            <AlertsList alerts={alerts} onMarkAsRead={handleMarkAsRead} />
+          </Suspense>
         </div>
       </div>
     </div>

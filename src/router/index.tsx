@@ -12,6 +12,7 @@ import Loading from '../modules/shared/components/Loading/Loading';
 // Lazy load pages
 const ManagerDashboard = lazy(() => import('../modules/dashboard/pages/ManagerDashboard'));
 const Chalets = lazy(() => import('../modules/chalets/pages/Chalets'));
+const ChaletDetails = lazy(() => import('../modules/chalets/pages/ChaletDetails'));
 const Services = lazy(() => import('../modules/services/pages/Services'));
 const About = lazy(() => import('../modules/about/pages/About'));
 const Contact = lazy(() => import('../modules/contact/pages/Contact'));
@@ -26,6 +27,7 @@ const router = createBrowserRouter(
       <Route index element={<HomePage />} />
       <Route path="dashboard" element={<ManagerDashboard />} />
       <Route path="chalets" element={<Chalets />} />
+      <Route path="chalets/:id" element={<ChaletDetails />} />
       <Route path="services" element={<Services />} />
       <Route path="about" element={<About />} />
       <Route path="contact" element={<Contact />} />

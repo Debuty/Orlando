@@ -42,28 +42,28 @@ export const HOME_CONTENT = {
     subtitle: 'اختر مسكنك المثالي لقضاء عطلة لا تُنسى',
     chalets: [
       {
-        id: 'blue-diamond',
-        name: 'فيلا علي البحر',
-        englishName: 'Seaside Villa',
-        features: 'With a pool and private garden',
-        price: 1800,
-        currency: 'مصري'
-      },
-      {
-        id: 'sea-turquoise',
-        name: 'قصر علي البحر',
-        englishName: 'Seaside Palace',
-        features: 'With sea view and private beach',
-        price: 1500,
-        currency: 'مصري'
-      },
-      {
-        id: 'bright-star',
-        name: 'فيلا 4 غرف',
-        englishName: '4-Bedroom Villa',
-        features: 'With inner courtyard',
+        id: '1',
+        name: 'شاليه البحر التركوازي',
+        englishName: 'Sea Turquoise Chalet',
+        features: 'مسبح خاص، إطلالة بحرية، مطبخ مجهز',
         price: 1200,
-        currency: 'مصري'
+        currency: 'ريال'
+      },
+      {
+        id: '2',
+        name: 'شاليه النجمة المضيئة',
+        englishName: 'Bright Star Chalet',
+        features: 'حديقة خاصة، جلسة خارجية، مطبخ مجهز',
+        price: 900,
+        currency: 'ريال'
+      },
+      {
+        id: '3',
+        name: 'شاليه الماسة الزرقاء',
+        englishName: 'Blue Diamond Chalet',
+        features: 'مسبح خاص، جاكوزي، مطبخ مجهز',
+        price: 1500,
+        currency: 'ريال'
       }
     ]
   },

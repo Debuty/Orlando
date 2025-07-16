@@ -3,6 +3,15 @@ import { Link } from 'react-router-dom';
 import SectionContainer from '../shared/SectionContainer';
 import { HOME_CONTENT } from '../../utils/constants';
 
+const getImagePath = (id: string) => {
+  const imageMap: { [key: string]: string } = {
+    '1': '/images/sea-turquoise-chalet.jpg',
+    '2': '/images/bright-star-chalet.jpg',
+    '3': '/images/blue-diamond-chalet.jpg'
+  };
+  return imageMap[id] || '/images/chalet-default.jpg';
+};
+
 const FeaturedChaletsSection: React.FC = () => {
   return (
     <div className="bg-white overflow-hidden">
@@ -18,13 +27,13 @@ const FeaturedChaletsSection: React.FC = () => {
                 className="relative"
               >
                 <Link 
-                  to={`/chalets/${chalet.id}`}
-                  className="block"
+                  to={`/chalets/${String(chalet.id)}`}
+                  className="block group"
                 >
-                  <div className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+                  <div className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all">
                     <div 
                       className="h-64 bg-cover bg-center relative"
-                      style={{ backgroundImage: `url(/images/${chalet.id}-chalet.jpg)` }}
+                      style={{ backgroundImage: `url(${getImagePath(chalet.id)})` }}
                     >
                       <div className="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-10 transition-opacity" />
                     </div>
@@ -36,7 +45,7 @@ const FeaturedChaletsSection: React.FC = () => {
                           {chalet.price} {chalet.currency}
                           <span className="text-xl font-bold text-zinc-500">/ليلة</span>
                         </span>
-                        <span className=" text-gray-400 font-semibold">عرض التفاصيل</span>
+                        <span className="text-gray-400 font-semibold">عرض التفاصيل</span>
                       </div>
                     </div>
                   </div>

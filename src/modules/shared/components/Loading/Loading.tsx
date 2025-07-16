@@ -30,6 +30,7 @@ const Loading = () => {
     return () => clearInterval(interval);
   }, []);
 
+
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-80">
       <div className="text-center">
