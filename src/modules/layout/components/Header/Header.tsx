@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Variants } from 'framer-motion';
+import { Logo } from './Logo';
 
 const menuVariants: Variants = {
   open: {
@@ -142,9 +143,9 @@ export const Header: React.FC = () => {
           <Link 
             to="/" 
             onClick={handleLinkClick} 
-            className="text-xl md:text-xl lg:text-2xl font-bold text-[#00B5E2] whitespace-nowrap hover:opacity-80 transition-opacity duration-200"
+            className="flex items-center gap-2 hover:opacity-90 transition-all duration-200 group"
           >
-            أورلاندو
+            <Logo />
           </Link>
 
           {/* Mobile menu button */}
