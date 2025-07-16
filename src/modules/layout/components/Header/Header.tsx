@@ -8,21 +8,17 @@ const sidebarVariants: Variants = {
   open: {
     x: 0,
     transition: {
-      type: "spring",
-      stiffness: 300,
-      damping: 30,
-      when: "beforeChildren",
-      staggerChildren: 0.05
+      type: "tween",
+      duration: 0.3,
+      ease: "easeOut"
     }
   },
   closed: {
     x: "100%",
     transition: {
-      type: "spring",
-      stiffness: 300,
-      damping: 30,
-      when: "afterChildren",
-      staggerChildren: 0.05
+      type: "tween",
+      duration: 0.3,
+      ease: "easeIn"
     }
   }
 };
@@ -73,13 +69,34 @@ export const Header: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation();
 
+  // Close sidebar on route change
   useEffect(() => {
-    window.scrollTo(0, 0);
+    setIsSidebarOpen(false);
   }, [location.pathname]);
 
+  // Close sidebar on escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsSidebarOpen(false);
+      }
+    };
+
+    if (isSidebarOpen) {
+      window.addEventListener('keydown', handleEscape);
+    }
+
+    return () => {
+      window.removeEventListener('keydown', handleEscape);
+    };
+  }, [isSidebarOpen]);
+
   const handleLinkClick = () => {
-    window.scrollTo(0, 0);
     setIsSidebarOpen(false);
+  };
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(prev => !prev);
   };
 
   return (
@@ -98,91 +115,105 @@ export const Header: React.FC = () => {
             </Link>
 
             {/* Menu Toggle Button */}
-            <motion.button
-              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-              className="rounded-full p-2 hover:bg-[#00B5E2]/5 transition-colors duration-300"
-              whileTap={{ scale: 0.95 }}
+            <button
+              onClick={toggleSidebar}
+              className="rounded-full p-2 hover:bg-[#00B5E2]/5 transition-colors duration-300 focus:outline-none"
+              aria-label={isSidebarOpen ? "Close menu" : "Open menu"}
             >
-              <motion.div
-                className="w-8 h-8 flex flex-col justify-center items-center gap-1.5"
-                animate={isSidebarOpen ? "open" : "closed"}
-              >
-                <motion.span
-                  className="w-6 h-0.5 bg-gray-700 block transform origin-center"
-                  variants={{
-                    open: { rotate: 45, y: 6 },
-                    closed: { rotate: 0, y: 0 }
-                  }}
+              <div className="w-8 h-8 flex flex-col justify-center items-center gap-1.5">
+                <span
+                  className={`w-6 h-0.5 bg-gray-700 block transition-all duration-300 transform origin-center ${
+                    isSidebarOpen ? 'rotate-45 translate-y-2' : ''
+                  }`}
                 />
-                <motion.span
-                  className="w-6 h-0.5 bg-gray-700 block transform origin-center"
-                  variants={{
-                    open: { opacity: 0 },
-                    closed: { opacity: 1 }
-                  }}
+                <span
+                  className={`w-6 h-0.5 bg-gray-700 block transition-all duration-300 ${
+                    isSidebarOpen ? 'opacity-0' : ''
+                  }`}
                 />
-                <motion.span
-                  className="w-6 h-0.5 bg-gray-700 block transform origin-center"
-                  variants={{
-                    open: { rotate: -45, y: -6 },
-                    closed: { rotate: 0, y: 0 }
-                  }}
+                <span
+                  className={`w-6 h-0.5 bg-gray-700 block transition-all duration-300 transform origin-center ${
+                    isSidebarOpen ? '-rotate-45 -translate-y-2' : ''
+                  }`}
                 />
-              </motion.div>
-            </motion.button>
+              </div>
+            </button>
           </div>
         </nav>
       </header>
 
-      {/* Sidebar Navigation */}
+      {/* Backdrop */}
       <AnimatePresence>
         {isSidebarOpen && (
-          <>
-            {/* Backdrop */}
-            <motion.div
-              className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsSidebarOpen(false)}
-            />
-            
-            {/* Sidebar */}
-            <motion.div
-              className="fixed top-0 right-0 bottom-0 w-80 bg-white shadow-xl z-50 flex flex-col"
-              variants={sidebarVariants}
-              initial="closed"
-              animate="open"
-              exit="closed"
-            >
-              {/* Sidebar Header */}
-              <div className="p-6 border-b">
-                <h2 className="text-xl font-cairo font-bold text-gray-800">القائمة</h2>
-              </div>
+          <motion.div
+            key="backdrop"
+            className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            onClick={() => setIsSidebarOpen(false)}
+          />
+        )}
+      </AnimatePresence>
 
-              {/* Navigation Links */}
-              <div className="flex-1 overflow-y-auto py-4">
-                <NavLink to="/" onClick={handleLinkClick}>الرئيسية</NavLink>
-                <NavLink to="/about" onClick={handleLinkClick}>عن أورلاندو</NavLink>
-                <NavLink to="/chalets" onClick={handleLinkClick}>جميع الشاليهات</NavLink>
-                <NavLink to="/services" onClick={handleLinkClick}>الخدمات</NavLink>
-                <NavLink to="/faq" onClick={handleLinkClick}>أسئلة شائعة</NavLink>
-                <NavLink to="/contact" onClick={handleLinkClick}>اتصل بنا</NavLink>
-                <NavLink to="/dashboard" onClick={handleLinkClick}>لوحة المدير</NavLink>
-              </div>
-
-              {/* Auth Button */}
-              <div className="p-6 border-t">
-                <Link
-                  to="/signup"
-                  onClick={handleLinkClick}
-                  className="block w-full py-3 px-6 bg-[#00B5E2] hover:bg-[#33C3E7] text-white rounded-lg font-cairo font-bold text-center transition-all duration-300 transform hover:scale-[1.02] hover:shadow-md"
+      {/* Sidebar */}
+      <AnimatePresence>
+        {isSidebarOpen && (
+          <motion.div
+            key="sidebar"
+            className="fixed top-0 right-0 bottom-0 w-80 bg-white shadow-xl z-50 flex flex-col"
+            variants={sidebarVariants}
+            initial="closed"
+            animate="open"
+            exit="closed"
+          >
+            {/* Sidebar Header */}
+            <div className="p-6 border-b flex items-center justify-between">
+              <h2 className="text-xl font-cairo font-bold text-gray-800">القائمة</h2>
+              <button
+                onClick={() => setIsSidebarOpen(false)}
+                className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#00B5E2]/5 transition-colors duration-300 focus:outline-none"
+                aria-label="Close menu"
+              >
+                <svg
+                  className="w-6 h-6 text-gray-700"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
                 >
-                  تسجيل دخول
-                </Link>
-              </div>
-            </motion.div>
-          </>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            {/* Rest of the sidebar content */}
+            <div className="flex-1 overflow-y-auto py-4">
+              <NavLink to="/" onClick={handleLinkClick}>الرئيسية</NavLink>
+              <NavLink to="/about" onClick={handleLinkClick}>عن أورلاندو</NavLink>
+              <NavLink to="/chalets" onClick={handleLinkClick}>جميع الشاليهات</NavLink>
+              <NavLink to="/services" onClick={handleLinkClick}>الخدمات</NavLink>
+              <NavLink to="/faq" onClick={handleLinkClick}>أسئلة شائعة</NavLink>
+              <NavLink to="/contact" onClick={handleLinkClick}>اتصل بنا</NavLink>
+              <NavLink to="/dashboard" onClick={handleLinkClick}>لوحة المدير</NavLink>
+            </div>
+
+            {/* Auth Button */}
+            <div className="p-6 border-t">
+              <Link
+                to="/signup"
+                onClick={handleLinkClick}
+                className="block w-full py-3 px-6 bg-[#00B5E2] hover:bg-[#33C3E7] text-white rounded-lg font-cairo font-bold text-center transition-all duration-300 transform hover:scale-[1.02] hover:shadow-md"
+              >
+                تسجيل دخول
+              </Link>
+            </div>
+          </motion.div>
         )}
       </AnimatePresence>
     </>
