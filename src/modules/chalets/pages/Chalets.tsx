@@ -13,6 +13,8 @@ const Chalets = () => {
     page: 1,
     perPage: ITEMS_PER_PAGE,
   });
+  const [currentPage, setCurrentPage] = useState(1);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   // Filter chalets based on search criteria
   const filteredChalets = MOCK_CHALETS.filter((chalet) => {
@@ -34,18 +36,39 @@ const Chalets = () => {
   // Calculate pagination
   const totalItems = filteredChalets.length;
   const totalPages = Math.ceil(totalItems / filters.perPage);
-  const startIndex = (filters.page - 1) * filters.perPage;
+  const startIndex = (currentPage - 1) * filters.perPage;
   const endIndex = startIndex + filters.perPage;
   const displayedChalets = filteredChalets.slice(startIndex, endIndex);
 
+  // Ensure page is valid when filters change
+  useEffect(() => {
+    if (currentPage > totalPages) {
+      setCurrentPage(Math.max(1, totalPages));
+    }
+  }, [totalPages, currentPage]);
+
   const handleFilterChange = (newFilters: ChaletsFilterParams) => {
-    // Reset to page 1 when filters change
-    setFilters({ ...newFilters, page: 1 });
+    setFilters(newFilters);
+    setCurrentPage(1); // Reset to first page when filters change
   };
 
-  const handlePageChange = (page: number) => {
-    setFilters(prev => ({ ...prev, page }));
+  const handlePageChange = (newPage: number) => {
+    // Validate page number
+    const validPage = Math.max(1, Math.min(newPage, totalPages));
+    
+    // Only proceed if it's a different page
+    if (validPage !== currentPage) {
+      setCurrentPage(validPage);
+    }
   };
+
+  // Add effect to handle scrolling when page changes
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }, [currentPage]); // This will trigger whenever currentPage changes
 
   // Track if we've handled the scroll
   const hasScrolledRef = useRef(false);
@@ -57,13 +80,13 @@ const Chalets = () => {
       const chaletIndex = filteredChalets.findIndex(c => String(c.id) === state.scrollToChaletId);
       if (chaletIndex !== -1) {
         const page = Math.floor(chaletIndex / filters.perPage) + 1;
-        if (page !== filters.page) {
-          setFilters(prev => ({ ...prev, page }));
+        if (page !== currentPage && page <= totalPages) {
+          setCurrentPage(page);
         }
         hasScrolledRef.current = true;
       }
     }
-  }, [location.state, filteredChalets, filters.perPage, filters.page]);
+  }, [location.state, filteredChalets, filters.perPage, currentPage, totalPages]);
 
   // Handle scrolling after page update
   useEffect(() => {
@@ -73,16 +96,15 @@ const Chalets = () => {
       if (chaletRef) {
         setTimeout(() => {
           chaletRef.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          // Clear the state after scrolling
           window.history.replaceState({}, document.title);
           hasScrolledRef.current = false;
         }, 100);
       }
     }
-  }, [location, filters.page]);
+  }, [location]);
 
   return (
-    <div className="container mx-auto px-4 py-8" dir="rtl">
+    <div className="container mx-auto px-4 py-8" dir="rtl" ref={contentRef}>
       <h1 className="text-3xl font-cairo font-bold text-gray-900 mb-8">الشاليهات</h1>
       
       <ChaletsFilters filters={filters} onFilterChange={handleFilterChange} />
@@ -147,7 +169,7 @@ const Chalets = () => {
 
       <ChaletsPagination
         pagination={{
-          currentPage: filters.page,
+          currentPage,
           totalPages,
           totalItems,
           itemsPerPage: filters.perPage

@@ -27,13 +27,13 @@ const CallToAction = () => {
 
           <div className="flex flex-wrap justify-center gap-4">
             <Link
-              to="/تصفح-الشاليهات"
+              to="/chalets"
               className="bg-[#00B5E2] text-white px-8 py-3 rounded-lg font-bold hover:bg-[#33C3E7] transition-colors"
             >
               تصفح الشاليهات
             </Link>
             <Link
-              to="/انشاء-حساب"
+              to="/signup"
               className="bg-white text-[#00B5E2] border-2 border-[#00B5E2] px-8 py-3 rounded-lg font-bold hover:bg-[#00B5E2]/5 transition-colors"
             >
               أنشئ حسابك

@@ -21,8 +21,8 @@ const ChaletDetails = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8" dir="rtl">
-      <div className="mb-6">
+    <div className="container mx-auto px-4 py-6 max-w-4xl" dir="rtl">
+      <div className="mb-4">
         <button
           onClick={handleBack}
           className="flex items-center gap-2 text-[#00B5E2] hover:text-[#33C3E7] transition-colors"
@@ -40,30 +40,30 @@ const ChaletDetails = () => {
         transition={{ duration: 0.3 }}
         className="bg-white rounded-lg shadow-sm overflow-hidden"
       >
-        <div className="relative h-96">
+        <div className="relative h-72">
           <img
             src={chalet.images[0]}
             alt={chalet.name}
             className="w-full h-full object-cover"
           />
           {chalet.rating && (
-            <div className="absolute top-4 left-4 bg-white/90 px-3 py-2 rounded-lg text-lg font-cairo">
+            <div className="absolute top-3 left-3 bg-white/90 px-2 py-1 rounded-lg text-base font-cairo">
               ⭐️ {chalet.rating}
             </div>
           )}
         </div>
 
-        <div className="p-6">
-          <div className="flex justify-between items-start mb-4">
-            <h1 className="text-3xl font-cairo font-bold text-gray-900">{chalet.name}</h1>
-            <div className="text-2xl font-cairo text-[#00B5E2] font-semibold">
+        <div className="p-4">
+          <div className="flex justify-between items-start mb-3">
+            <h1 className="text-2xl font-cairo font-bold text-gray-900">{chalet.name}</h1>
+            <div className="text-xl font-cairo text-[#00B5E2] font-semibold">
               {chalet.price} ريال / ليلة
             </div>
           </div>
 
-          <p className="text-gray-600 text-lg mb-6">{chalet.description}</p>
+          <p className="text-gray-600 text-base mb-4">{chalet.description}</p>
 
-          <div className="grid grid-cols-2 gap-4 mb-6">
+          <div className="grid grid-cols-2 gap-3 mb-4">
             <div className="flex items-center gap-2 text-gray-600">
               <span>👥</span>
               <span>السعة: {chalet.capacity} أشخاص</span>
@@ -74,13 +74,13 @@ const ChaletDetails = () => {
             </div>
           </div>
 
-          <div className="mb-6">
-            <h2 className="text-xl font-cairo font-semibold mb-3">المميزات</h2>
+          <div className="mb-4">
+            <h2 className="text-lg font-cairo font-semibold mb-2">المميزات</h2>
             <div className="flex flex-wrap gap-2">
               {chalet.features.map((feature, index) => (
                 <span
                   key={index}
-                  className="bg-[#00B5E2]/5 text-[#00B5E2] px-3 py-2 rounded-lg text-sm"
+                  className="bg-[#00B5E2]/5 text-[#00B5E2] px-2 py-1 rounded-lg text-sm"
                 >
                   {feature}
                 </span>
@@ -89,7 +89,7 @@ const ChaletDetails = () => {
           </div>
 
           <button
-            className="w-full bg-[#00B5E2] hover:bg-[#33C3E7] text-white font-medium py-3 px-6 rounded-lg transition-colors text-lg"
+            className="w-full bg-[#00B5E2] hover:bg-[#33C3E7] text-white font-medium py-2 px-4 rounded-lg transition-colors text-base"
           >
             احجز الآن
           </button>
