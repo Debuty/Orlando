@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { MOCK_CHALETS, ITEMS_PER_PAGE } from '../utils/constants';
 import type { ChaletsFilterParams, Chalet } from '../types';
 import ChaletsFilters from '../components/filters/ChaletsFilters';
@@ -7,6 +7,8 @@ import ChaletsPagination from '../components/pagination/ChaletsPagination';
 import { motion } from 'framer-motion';
 
 const Chalets = () => {
+  const location = useLocation();
+  const chaletRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
   const [filters, setFilters] = useState<ChaletsFilterParams>({
     page: 1,
     perPage: ITEMS_PER_PAGE,
@@ -37,12 +39,47 @@ const Chalets = () => {
   const displayedChalets = filteredChalets.slice(startIndex, endIndex);
 
   const handleFilterChange = (newFilters: ChaletsFilterParams) => {
-    setFilters(newFilters);
+    // Reset to page 1 when filters change
+    setFilters({ ...newFilters, page: 1 });
   };
 
   const handlePageChange = (page: number) => {
-    setFilters({ ...filters, page });
+    setFilters(prev => ({ ...prev, page }));
   };
+
+  // Track if we've handled the scroll
+  const hasScrolledRef = useRef(false);
+
+  // Update page when coming from details
+  useEffect(() => {
+    const state = location.state as { scrollToChaletId?: string } | null;
+    if (state?.scrollToChaletId && !hasScrolledRef.current) {
+      const chaletIndex = filteredChalets.findIndex(c => String(c.id) === state.scrollToChaletId);
+      if (chaletIndex !== -1) {
+        const page = Math.floor(chaletIndex / filters.perPage) + 1;
+        if (page !== filters.page) {
+          setFilters(prev => ({ ...prev, page }));
+        }
+        hasScrolledRef.current = true;
+      }
+    }
+  }, [location.state, filteredChalets, filters.perPage, filters.page]);
+
+  // Handle scrolling after page update
+  useEffect(() => {
+    const state = location.state as { scrollToChaletId?: string } | null;
+    if (state?.scrollToChaletId && hasScrolledRef.current) {
+      const chaletRef = chaletRefs.current[state.scrollToChaletId];
+      if (chaletRef) {
+        setTimeout(() => {
+          chaletRef.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          // Clear the state after scrolling
+          window.history.replaceState({}, document.title);
+          hasScrolledRef.current = false;
+        }, 100);
+      }
+    }
+  }, [location, filters.page]);
 
   return (
     <div className="container mx-auto px-4 py-8" dir="rtl">
@@ -54,6 +91,7 @@ const Chalets = () => {
         {displayedChalets.map((chalet) => (
           <motion.div
             key={chalet.id}
+            ref={el => chaletRefs.current[String(chalet.id)] = el}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
