@@ -183,6 +183,9 @@ export const Header: React.FC = () => {
             <Link to="/contact" onClick={handleLinkClick} className={linkClasses}>
               اتصل بنا
             </Link>
+            <Link to="/dashboard" onClick={handleLinkClick} className={linkClasses}>
+              لوحة المدير
+            </Link>
           </div>
 
           {/* Auth Buttons */}
@@ -214,6 +217,7 @@ export const Header: React.FC = () => {
                 <MobileNavLink to="/services" onClick={handleLinkClick}>الخدمات</MobileNavLink>
                 <MobileNavLink to="/faq" onClick={handleLinkClick}>أسئلة شائعة</MobileNavLink>
                 <MobileNavLink to="/contact" onClick={handleLinkClick}>اتصل بنا</MobileNavLink>
+                <MobileNavLink to="/dashboard" onClick={handleLinkClick}>لوحة المدير</MobileNavLink>
                 
                 <motion.div variants={menuItemVariants}>
                   <Link
