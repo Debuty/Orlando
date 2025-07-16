@@ -3,6 +3,6 @@ interface ChartComponentsProps {
   bookingsData: Array<{ month: string; bookings: number }>;
   occupancyData: Array<{ month: string; rate: number }>;
 }
-
+ 
 declare const ChartComponents: React.FC<ChartComponentsProps>;
 export default ChartComponents; 

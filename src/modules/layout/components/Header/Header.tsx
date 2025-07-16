@@ -28,19 +28,19 @@ const NavLink = ({ to, children, onClick }: { to: string; children: React.ReactN
   const isActive = location.pathname === to;
 
   return (
-    <Link
-      to={to}
-      onClick={onClick}
+      <Link
+        to={to}
+        onClick={onClick}
       className={`relative flex items-center w-full px-6 py-3 text-base font-cairo font-bold transition-all duration-300 group overflow-hidden ${
         isActive ? 'text-[#00B5E2] bg-[#00B5E2]/5' : 'text-gray-700 hover:text-[#00B5E2] hover:bg-[#00B5E2]/5'
       }`}
-    >
+      >
       {/* Active indicator */}
       <motion.div
         className={`absolute right-0 top-0 h-full w-1 bg-[#00B5E2] transform transition-transform duration-300 ${
           isActive ? 'scale-y-100' : 'scale-y-0 group-hover:scale-y-100'
         }`}
-      />
+        />
       
       {/* Text container */}
       <span className="relative z-10 flex items-center justify-between w-full">
@@ -61,7 +61,7 @@ const NavLink = ({ to, children, onClick }: { to: string; children: React.ReactN
           </motion.svg>
         )}
       </span>
-    </Link>
+      </Link>
   );
 };
 
@@ -94,7 +94,7 @@ export const Header: React.FC = () => {
   const handleLinkClick = () => {
     setIsSidebarOpen(false);
   };
-
+    
   const toggleSidebar = () => {
     setIsSidebarOpen(prev => !prev);
   };
@@ -104,22 +104,22 @@ export const Header: React.FC = () => {
       {/* Main Header */}
       <header className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm shadow-lg z-40">
         <nav className="container mx-auto px-4">
-          <div className="flex h-16 justify-between items-center">
-            {/* Logo */}
+        <div className="flex h-16 justify-between items-center">
+          {/* Logo */}
             <Link 
               to="/" 
               onClick={handleLinkClick} 
               className="flex items-center gap-2 hover:opacity-90 transition-all duration-200"
             >
               <Logo />
-            </Link>
+          </Link>
 
             {/* Menu Toggle Button */}
             <button
               onClick={toggleSidebar}
               className="rounded-full p-2 hover:bg-[#00B5E2]/5 transition-colors duration-300 focus:outline-none"
               aria-label={isSidebarOpen ? "Close menu" : "Open menu"}
-            >
+          >
               <div className="w-8 h-8 flex flex-col justify-center items-center gap-1.5">
                 <span
                   className={`w-6 h-0.5 bg-gray-700 block transition-all duration-300 transform origin-center ${
@@ -136,7 +136,7 @@ export const Header: React.FC = () => {
                     isSidebarOpen ? '-rotate-45 -translate-y-2' : ''
                   }`}
                 />
-              </div>
+          </div>
             </button>
           </div>
         </nav>
@@ -160,13 +160,13 @@ export const Header: React.FC = () => {
       {/* Sidebar */}
       <AnimatePresence>
         {isSidebarOpen && (
-          <motion.div
+            <motion.div
             key="sidebar"
             className="fixed top-0 right-0 bottom-0 w-80 bg-white shadow-xl z-50 flex flex-col"
             variants={sidebarVariants}
-            initial="closed"
-            animate="open"
-            exit="closed"
+              initial="closed"
+              animate="open"
+              exit="closed"
           >
             {/* Sidebar Header */}
             <div className="p-6 border-b flex items-center justify-between">
@@ -205,17 +205,17 @@ export const Header: React.FC = () => {
 
             {/* Auth Button */}
             <div className="p-6 border-t">
-              <Link
-                to="/signup"
-                onClick={handleLinkClick}
+                  <Link
+                    to="/signup"
+                    onClick={handleLinkClick}
                 className="block w-full py-3 px-6 bg-[#00B5E2] hover:bg-[#33C3E7] text-white rounded-lg font-cairo font-bold text-center transition-all duration-300 transform hover:scale-[1.02] hover:shadow-md"
-              >
+                  >
                 تسجيل دخول
-              </Link>
+                  </Link>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </motion.div>
+          )}
+        </AnimatePresence>
     </>
   );
 }; 

@@ -1,22 +1,28 @@
-export interface Chalet {
+export interface ChaletBooking {
+  checkIn: string;
+  checkOut: string;
+  status: 'pending' | 'confirmed' | 'cancelled';
+}
+
+export interface ChaletInfo {
   id: string;
   name: string;
-  description: string;
   price: number;
+  rating: number;
   images: string[];
-  features: string[];
+  description: string;
+  amenities: string[];
   capacity: number;
-  location: string;
-  rating?: number;
+  bookings: ChaletBooking[];
 }
 
 export interface ChaletsFilterParams {
+  page: number;
+  perPage: number;
   search?: string;
   minPrice?: number;
   maxPrice?: number;
   capacity?: number;
-  page: number;
-  perPage: number;
 }
 
 export interface ChaletsPaginationData {
@@ -24,4 +30,15 @@ export interface ChaletsPaginationData {
   totalPages: number;
   totalItems: number;
   itemsPerPage: number;
+}
+
+export interface Chalet {
+  id: string;
+  name: string;
+  description: string;
+  images: string[];
+  price: number;
+  capacity: number;
+  features: string[];
+  rating?: number;
 } 

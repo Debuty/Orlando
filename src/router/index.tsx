@@ -19,6 +19,7 @@ const Contact = lazy(() => import('../modules/contact/pages/Contact'));
 const FAQ = lazy(() => import('../modules/faq/pages/FAQ'));
 const Login = lazy(() => import('../modules/auth/pages/Login'));
 const Signup = lazy(() => import('../modules/auth/pages/Signup'));
+const BookingConfirmation = lazy(() => import('../modules/booking/pages/BookingConfirmation'));
 import HomePage from './../modules/home/pages/HomePage';
 
 const router = createBrowserRouter(
@@ -34,6 +35,7 @@ const router = createBrowserRouter(
       <Route path="faq" element={<FAQ />} />
       <Route path="login" element={<Login />} />
       <Route path="signup" element={<Signup />} />
+      <Route path="booking/:bookingId/confirmation" element={<BookingConfirmation />} />
     </Route>
   )
 );
