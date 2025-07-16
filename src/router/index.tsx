@@ -10,7 +10,7 @@ import RootLayout from '../modules/layout/components/RootLayout';
 import Loading from '../modules/shared/components/Loading/Loading';
 
 // Lazy load pages
-
+const ManagerDashboard = lazy(() => import('../modules/dashboard/pages/ManagerDashboard'));
 const Chalets = lazy(() => import('../modules/chalets/pages/Chalets'));
 const Services = lazy(() => import('../modules/services/pages/Services'));
 const About = lazy(() => import('../modules/about/pages/About'));
@@ -24,6 +24,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<HomePage />} />
+      <Route path="dashboard" element={<ManagerDashboard />} />
       <Route path="chalets" element={<Chalets />} />
       <Route path="services" element={<Services />} />
       <Route path="about" element={<About />} />
