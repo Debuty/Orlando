@@ -55,6 +55,28 @@ const menuItemVariants: Variants = {
   }
 };
 
+const NavLink = ({ to, children, onClick }: { to: string; children: React.ReactNode; onClick?: () => void }) => {
+  const location = useLocation();
+  const isActive = location.pathname === to;
+
+  return (
+    <Link
+      to={to}
+      onClick={onClick}
+      className={`relative px-1 md:px-1.5 lg:px-3 py-2 text-sm md:text-sm lg:text-base font-semibold transition-all duration-300 group whitespace-nowrap ${
+        isActive ? 'text-[#00B5E2]' : 'text-gray-700 hover:text-[#00B5E2]'
+      }`}
+    >
+      {children}
+      <span 
+        className={`absolute bottom-0 left-0 w-full h-0.5 bg-[#00B5E2] transform origin-left transition-transform duration-300 ease-out ${
+          isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+        }`} 
+      />
+    </Link>
+  );
+};
+
 const MobileNavLink = ({ to, children, onClick }: { to: string; children: React.ReactNode; onClick: () => void }) => {
   const location = useLocation();
   const isActive = location.pathname === to;
@@ -103,27 +125,25 @@ export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
 
-  // Handle scroll restoration on route change
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
   const handleLinkClick = () => {
-    // Scroll to top immediately when link is clicked
     window.scrollTo(0, 0);
-    
-    // Use a slight delay to allow the animation to complete
     setTimeout(() => setIsMenuOpen(false), 100);
   };
 
-  const linkClasses = "text-gray-700 hover:text-gray-900 px-3 md:px-2 lg:px-3 py-2 font-semibold text-base md:text-sm lg:text-base tracking-wide transition-colors duration-200";
-
   return (
     <header className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm shadow-lg z-50">
-      <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <nav className="container mx-auto px-2 md:px-3 lg:px-4">
         <div className="flex h-16 justify-between items-center">
           {/* Logo */}
-          <Link to="/" onClick={handleLinkClick} className="text-2xl md:text-xl lg:text-2xl font-bold text-[#00B5E2] whitespace-nowrap">
+          <Link 
+            to="/" 
+            onClick={handleLinkClick} 
+            className="text-xl md:text-xl lg:text-2xl font-bold text-[#00B5E2] whitespace-nowrap hover:opacity-80 transition-opacity duration-200"
+          >
             أورلاندو
           </Link>
 
@@ -164,28 +184,14 @@ export const Header: React.FC = () => {
           </motion.button>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden md:flex items-center md:space-x-3 lg:space-x-8 space-x-reverse">
-            <Link to="/" onClick={handleLinkClick} className={linkClasses}>
-              الرئيسية
-            </Link>
-            <Link to="/about" onClick={handleLinkClick} className={linkClasses}>
-              عن أورلاندو
-            </Link>
-            <Link to="/chalets" onClick={handleLinkClick} className={linkClasses}>
-              جميع الشاليهات
-            </Link>
-            <Link to="/services" onClick={handleLinkClick} className={linkClasses}>
-              الخدمات
-            </Link>
-            <Link to="/faq" onClick={handleLinkClick} className={linkClasses}>
-              أسئلة شائعة
-            </Link>
-            <Link to="/contact" onClick={handleLinkClick} className={linkClasses}>
-              اتصل بنا
-            </Link>
-            <Link to="/dashboard" onClick={handleLinkClick} className={linkClasses}>
-              لوحة المدير
-            </Link>
+          <div className="hidden md:flex items-center gap-0.5 md:gap-1 lg:gap-2">
+            <NavLink to="/" onClick={handleLinkClick}>الرئيسية</NavLink>
+            <NavLink to="/about" onClick={handleLinkClick}>عن أورلاندو</NavLink>
+            <NavLink to="/chalets" onClick={handleLinkClick}>جميع الشاليهات</NavLink>
+            <NavLink to="/services" onClick={handleLinkClick}>الخدمات</NavLink>
+            <NavLink to="/faq" onClick={handleLinkClick}>أسئلة شائعة</NavLink>
+            <NavLink to="/contact" onClick={handleLinkClick}>اتصل بنا</NavLink>
+            <NavLink to="/dashboard" onClick={handleLinkClick}>لوحة المدير</NavLink>
           </div>
 
           {/* Auth Buttons */}
@@ -193,7 +199,7 @@ export const Header: React.FC = () => {
             <Link
               to="/signup"
               onClick={handleLinkClick}
-              className="bg-[#00B5E2] hover:bg-[#33C3E7] text-white px-4 md:px-2 lg:px-4 py-2 rounded-lg font-semibold text-base md:text-sm lg:text-base tracking-wide transition-all duration-200 whitespace-nowrap"
+              className="bg-[#00B5E2] hover:bg-[#33C3E7] text-white px-3 md:px-4 lg:px-6 py-2 rounded-lg font-semibold text-sm md:text-sm lg:text-base tracking-wide transition-all duration-300 transform hover:scale-105 hover:shadow-md active:scale-95 whitespace-nowrap"
             >
               تسجيل دخول
             </Link>
@@ -201,7 +207,7 @@ export const Header: React.FC = () => {
         </div>
 
         {/* Mobile Navigation Menu */}
-        <AnimatePresence mode="wait">
+        <AnimatePresence>
           {isMenuOpen && (
             <motion.div
               className="md:hidden overflow-hidden"

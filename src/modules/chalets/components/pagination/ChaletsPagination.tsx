@@ -109,9 +109,9 @@ const ChaletsPagination = ({ pagination, onPageChange }: ChaletsPaginationProps)
         </button>
       </div>
 
-      <div className="text-center text-sm text-gray-600" role="status" aria-live="polite">
+      {/* <div className="text-center text-sm text-gray-600" role="status" aria-live="polite">
         عرض {startItem} - {endItem} من {totalItems} شاليه
-      </div>
+      </div> */}
     </nav>
   );
 };
