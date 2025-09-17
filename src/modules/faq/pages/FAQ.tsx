@@ -11,7 +11,7 @@ const FAQ = () => {
   const activeSection = FAQ_SECTIONS.find(section => section.category.id === activeCategory);
 
   return (
-    <div className="min-h-screen bg-gray-50" dir="rtl">
+    <div className="min-h-screen bg-gray-50" >
       <FAQHero {...FAQ_CONTENT.hero} />
       
       <div className="container mx-auto px-4 mb-16">

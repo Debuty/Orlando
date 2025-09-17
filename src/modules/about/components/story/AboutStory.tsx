@@ -1,14 +1,16 @@
 import { motion } from 'framer-motion';
 import { ABOUT_STORY } from '../../utils/constants';
+import { useTranslation } from 'react-i18next';
 
 const AboutStory = () => {
+  const { t } = useTranslation('about');
   return (
     <section className="py-16">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto space-y-16">
           {ABOUT_STORY.map((section, index) => (
             <motion.div
-              key={section.title}
+              key={section.tag}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -21,7 +23,7 @@ const AboutStory = () => {
                 <div className="w-full md:w-1/2">
                   <img
                     src={section.image}
-                    alt={section.title}
+                    alt={t(`story.${section.tag}.title`)}
                     className="w-full h-auto rounded-lg shadow-sm"
                   />
                 </div>
@@ -29,10 +31,10 @@ const AboutStory = () => {
               
               <div className={`w-full ${section.image ? 'md:w-1/2' : 'md:w-full'}`}>
                 <h3 className="text-3xl font-cairo font-bold text-gray-900 mb-4">
-                  {section.title}
+                  {t(`story.${section.tag}.title`)}
                 </h3>
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  {section.content}
+                  {t(`story.${section.tag}.content`)}
                 </p>
               </div>
             </motion.div>

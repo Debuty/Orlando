@@ -1,0 +1,58 @@
+{
+  "aboutHero": {
+    "title": "Welcome to Orlando",
+    "subtitle": "Your perfect destination for comfort and relaxation",
+    "description": "We provide a unique experience in the world of luxury chalets, combining comfort, luxury, and exceptional service"
+  },
+  "story": {
+    "ourStory": {
+      "title": "Our Story",
+      "content": "Orlando's journey began in 2020 with a clear vision to provide an exceptional accommodation experience that combines luxury and comfort. We are proud to offer modern chalets equipped with the latest amenities for our valued guests."
+    },
+    "vision": {
+      "title": "Our Vision",
+      "content": "We strive to be the first destination for those seeking comfort and relaxation in Saudi Arabia, by providing distinguished services and an unforgettable accommodation experience."
+    },
+    "mission": {
+      "title": "Our Mission",
+      "content": "To provide an exceptional accommodation experience for our guests by paying attention to the finest details and providing the highest standards of quality and service."
+    }
+  },
+  "values": {
+    "title": "Our Values",
+    "quality": {
+      "title": "Quality",
+      "description": "We are committed to providing the highest quality standards in every detail of our services"
+    },
+    "comfort": {
+      "title": "Comfort",
+      "description": "We prioritize our guests' comfort and strive to provide everything they need"
+    },
+    "privacy": {
+      "title": "Privacy",
+      "description": "We guarantee our guests the highest levels of privacy and security during their stay"
+    },
+    "innovation": {
+      "title": "Innovation",
+      "description": "We always strive to develop our services and provide innovative solutions to improve our guests' experience"
+    }
+  },
+  "stats": {
+    "luxuryChalets": {
+      "value": "Luxury Chalets",
+      "label": "Luxury Chalets"
+    },
+    "happyGuests": {
+      "value": "Happy Guests",
+      "label": "Happy Guests"
+    },
+    "customerService": {
+      "value": "Customer Service",
+      "label": "Customer Service"
+    },
+    "customerRating": {
+      "value": "Customer Rating",
+      "label": "Customer Rating"
+    }
+  }
+}

@@ -1,5 +1,6 @@
 export interface AboutValue {
   id: number;
+  tag: string;
   title: string;
   description: string;
   icon: string;
@@ -8,6 +9,7 @@ export interface AboutValue {
 export interface AboutStat {
   id: number;
   value: string;
+  tag: string;
   label: string;
 }
 
@@ -20,6 +22,7 @@ export interface TeamMember {
 
 export interface AboutStorySection {
   title: string;
+  tag: string;
   content: string;
   image?: string;
 } 

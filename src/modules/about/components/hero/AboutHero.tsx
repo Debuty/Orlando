@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion';
 import { ABOUT_HERO } from '../../utils/constants';
+import { useTranslation } from 'react-i18next';
 
 const AboutHero = () => {
+  const { t } = useTranslation('about');
   return (
     <section className="relative py-20 overflow-hidden bg-[#00B5E2]/5">
       <div className="container mx-auto px-4">
@@ -12,7 +14,7 @@ const AboutHero = () => {
             transition={{ duration: 0.5 }}
             className="text-5xl font-cairo font-bold text-gray-900 mb-6"
           >
-            {ABOUT_HERO.title}
+            {t('aboutHero.title')}
           </motion.h1>
           
           <motion.h2
@@ -21,7 +23,7 @@ const AboutHero = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-2xl font-cairo text-gray-700 mb-8"
           >
-            {ABOUT_HERO.subtitle}
+            {t('aboutHero.subtitle')}
           </motion.h2>
 
           <motion.p
@@ -30,7 +32,7 @@ const AboutHero = () => {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="text-lg text-gray-600 leading-relaxed"
           >
-            {ABOUT_HERO.description}
+            {t('aboutHero.description')}
           </motion.p>
         </div>
       </div>

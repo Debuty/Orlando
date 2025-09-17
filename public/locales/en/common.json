@@ -1,0 +1,35 @@
+{
+  "navigation": {
+    "home": "Home",
+    "chalets": "Chalets",
+    "services": "Services",
+    "about": "About Orlando",
+    "contact": "Contact Us",
+    "faq": "FAQ",
+    "login": "Login",
+    "signup": "Sign Up",
+    "dashboard": "Manager Dashboard",
+    "menu": "Menu"
+  },
+  "buttons": {
+    "bookNow": "Book Now",
+    "learnMore": "Learn More",
+    "contactUs": "Contact Us",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "close": "Close",
+    "menu": "Menu"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success",
+    "welcome": "Welcome",
+    "currency": "SAR"
+  },
+  "language": {
+    "switch": "Language",
+    "arabic": "عربي",
+    "english": "English"
+  }
+}

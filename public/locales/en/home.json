@@ -1,0 +1,84 @@
+{
+  "hero": {
+    "welcomeText": "Welcome to Orlando Resort",
+    "subText": "Your summer vacation starts here",
+    "buttons": {
+      "browse": "Start Browsing",
+      "createAccount": "Create Account Now"
+    }
+  },
+  "whyOrlando": {
+    "title": "Why Orlando?",
+    "subtitle": "An exceptional experience awaits you",
+    "features": {
+      "security": {
+        "title": "Secure & Maintenance",
+        "description": "24/7 security team and maintenance services"
+      },
+      "pricing": {
+        "title": "Competitive Prices",
+        "description": "Best value for luxury services and products"
+      },
+      "location": {
+        "title": "Prime Location",
+        "description": "Chalets located on upscale coastlines"
+      },
+      "services": {
+        "title": "Integrated Services",
+        "description": "Complete hospitality services for shopping, cooking, and cleaning"
+      }
+    }
+  },
+  "featuredChalets": {
+    "title": "Our Featured Chalets",
+    "subtitle": "Choose your perfect accommodation for an unforgettable vacation",
+    "chalets": {
+      "seaTurquoise": {
+        "name": "Sea Turquoise Chalet",
+        "features": "Private pool, sea view, equipped kitchen"
+      },
+      "brightStar": {
+        "name": "Bright Star Chalet",
+        "features": "Private garden, outdoor seating, equipped kitchen"
+      },
+      "blueDiamond": {
+        "name": "Blue Diamond Chalet",
+        "features": "Private pool, jacuzzi, equipped kitchen"
+      }
+    },
+    "pricePerNight": "/night",
+    "viewDetails": "View Details"
+  },
+  "reviews": {
+    "title": "Customer Reviews",
+    "subtitle": "What our customers say about their experience with us",
+    "testimonials": {
+      "fatima": {
+        "name": "Fatima Al-Othman",
+        "title": "Perfect Choice",
+        "content": "We had the most wonderful time at Orlando chalets. Excellent service and prime location."
+      },
+      "ali": {
+        "name": "Ali Al-Sulaiman",
+        "title": "Unique Experience",
+        "content": "The place is elegant and services are comprehensive. Very happy with my Orlando experience."
+      },
+      "layla": {
+        "name": "Layla Al-Rahman",
+        "title": "Best Service",
+        "content": "Amazing views and clean, fully equipped chalets. An experience worth repeating."
+      }
+    }
+  },
+  "cta": {
+    "title": "Ready for your perfect vacation?",
+    "subtitle": "Book your chalet today and enjoy an unparalleled experience at Orlando Resort",
+    "buttons": {
+      "browse": "Browse Chalets",
+      "createAccount": "Create Your Account Now"
+    }
+  },
+  "promoVideo": {
+    "playButton": "Play Video"
+  }
+}

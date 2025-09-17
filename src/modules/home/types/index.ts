@@ -20,6 +20,7 @@ export interface Chalet {
 // Review Types
 export interface Review {
   id: number;
+  tag: string;
   name: string;
   title: string;
   content: string;

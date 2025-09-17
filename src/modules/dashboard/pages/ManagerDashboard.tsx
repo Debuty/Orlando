@@ -28,7 +28,7 @@ const ManagerDashboard = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8" dir="rtl">
+    <div className="container mx-auto px-4 py-8">
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900">لوحة التحكم</h1>
         <p className="mt-1 text-gray-600">مرحباً بك في لوحة تحكم مدير القرية</p>

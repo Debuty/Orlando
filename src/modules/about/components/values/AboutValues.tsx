@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { ABOUT_VALUES } from '../../utils/constants';
+import { useTranslation } from 'react-i18next';
 
 const ValueIcon = ({ name }: { name: string }) => {
   switch (name) {
@@ -41,6 +42,7 @@ const ValueIcon = ({ name }: { name: string }) => {
 };
 
 const AboutValues = () => {
+  const { t } = useTranslation('about');
   return (
     <section className="py-16 bg-[#00B5E2]/5">
       <div className="container mx-auto px-4">
@@ -50,13 +52,13 @@ const AboutValues = () => {
           viewport={{ once: true }}
           className="text-4xl font-cairo font-bold text-gray-900 text-center mb-12"
         >
-          قيمنا
+          {t('values.title')}
         </motion.h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
           {ABOUT_VALUES.map((value, index) => (
             <motion.div
-              key={value.id}
+              key={value.tag}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -70,11 +72,11 @@ const AboutValues = () => {
               </div>
               
               <h3 className="text-xl font-cairo font-bold text-gray-900 text-center mb-3">
-                {value.title}
+                {t(`values.${value.tag}.title`)}
               </h3>
               
               <p className="text-gray-600 text-center leading-relaxed">
-                {value.description}
+                {t(`values.${value.tag}.description`)}
               </p>
             </motion.div>
           ))}

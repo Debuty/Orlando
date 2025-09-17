@@ -1,0 +1,29 @@
+{
+  "brand": {
+    "name": "Orlando",
+    "description": "We provide you with the best beachfront chalets with integrated services for the most beautiful vacations"
+  },
+  "quickLinks": {
+    "title": "Quick Links",
+    "about": "About Orlando",
+    "chalets": "Chalets",
+    "services": "Services",
+    "faq": "FAQ",
+    "contact": "Contact Us"
+  },
+  "contactInfo": {
+    "title": "Contact Information",
+    "email": "info@orlando.com",
+    "phone": "+966 123 456 789",
+    "location": "Jeddah, Saudi Arabia"
+  },
+  "socialMedia": {
+    "title": "Follow Us",
+    "facebook": "Facebook",
+    "twitter": "Twitter",
+    "instagram": "Instagram"
+  },
+  "copyright": {
+    "text": "All rights reserved"
+  }
+}

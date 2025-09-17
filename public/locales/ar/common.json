@@ -1,0 +1,35 @@
+{
+  "navigation": {
+    "home": "الرئيسية",
+    "chalets": "الشاليهات",
+    "services": "الخدمات",
+    "about": "عن اورلاندو",
+    "contact": "اتصل بنا",
+    "faq": "أسئلة شائعة",
+    "login": "تسجيل دخول",
+    "signup": "انشاء حساب",
+    "dashboard": "لوحة المدير",
+    "menu": "القائمة"
+  },
+  "buttons": {
+    "bookNow": "احجز الآن",
+    "learnMore": "اعرف المزيد",
+    "contactUs": "تواصل معنا",
+    "submit": "إرسال",
+    "cancel": "إلغاء",
+    "close": "إغلاق",
+    "menu": "القائمة"
+  },
+  "common": {
+    "loading": "جاري التحميل...",
+    "error": "حدث خطأ",
+    "success": "نجح",
+    "welcome": "مرحباً",
+    "currency": "ريال"
+  },
+  "language": {
+    "switch": "اللغة",
+    "arabic": "عربي",
+    "english": "English"
+  }
+}

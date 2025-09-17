@@ -5,8 +5,10 @@ import ReviewCard from './ReviewCard';
 import { HOME_CONTENT } from '../../utils/constants';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { useTranslation } from 'react-i18next';
 
 const ReviewsSection: React.FC = () => {
+  const { t } = useTranslation('home');
   const settings = {
     dots: true,
     infinite: true,
@@ -37,8 +39,8 @@ const ReviewsSection: React.FC = () => {
   return (
     <div className="bg-gray-50 py-12">
       <SectionContainer
-        title="آراء عملائنا"
-        subtitle="ماذا يقول عملائنا عن تجربتهم معنا"
+        title={t('reviews.title')}
+        subtitle={t('reviews.subtitle')}
       >
         <div className="px-4">
           <Slider {...settings}>

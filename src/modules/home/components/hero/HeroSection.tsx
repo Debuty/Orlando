@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { Variants, Transition } from 'framer-motion';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 type AnimationType = {
   initial: Record<string, number>;
@@ -23,7 +24,7 @@ const textAnimation: AnimationType = {
 
 const HeroSection: React.FC = () => {
   const navigate = useNavigate();
-
+  const { t } = useTranslation('home');
   const handleNavigation = (path: string): void => {
     navigate(path);
   };
@@ -51,7 +52,7 @@ const HeroSection: React.FC = () => {
           transition={{ ...textAnimation.transition, delay: 0.3 }}
           className="text-[1.75rem] sm:text-[2rem] md:text-[2.25rem] lg:text-[2.75rem] font-medium mb-6 font-cairo leading-relaxed"
         >
-          مرحبًا بكم في منتجع أورلاندو
+          {t('hero.welcomeText')}
         </motion.h1>
 
         {/* Subtitle with Slide Up + Fade */}
@@ -71,7 +72,7 @@ const HeroSection: React.FC = () => {
             onClick={() => handleNavigation('/chalets')}
             className="bg-[#00B5E2] hover:bg-[#33C3E7] text-white px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 rounded-lg text-base sm:text-lg md:text-xl font-bold tracking-wide transition-all duration-200"
           >
-            ابدأ التصفح
+            {t('hero.buttons.browse')}
           </button>
 
           {/* Secondary Button - Create Account */}
@@ -79,7 +80,7 @@ const HeroSection: React.FC = () => {
             onClick={() => handleNavigation('/signup')}
             className="bg-transparent border-2 border-[#00B5E2] text-white hover:bg-[#00B5E2] hover:text-white px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 rounded-lg text-base sm:text-lg md:text-xl font-bold tracking-wide transition-all duration-200"
           >
-            أنشئ حساب الآن
+            {t('hero.buttons.createAccount')}
           </button>
         </div>
       </div>

@@ -3,6 +3,11 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Variants } from 'framer-motion';
 import { Logo } from './Logo';
+import { changeLang } from '../../../../store/reducers/localeSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import i18n from '../../../../i18n/i18n';
+import type { RootState } from '../../../../store';
 
 const sidebarVariants: Variants = {
   open: {
@@ -68,7 +73,9 @@ const NavLink = ({ to, children, onClick }: { to: string; children: React.ReactN
 export const Header: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation();
-
+  const dispatch = useDispatch();
+  const { t } = useTranslation('common');
+  const lang = useSelector((state: RootState) => state.locale.lang);
   // Close sidebar on route change
   useEffect(() => {
     setIsSidebarOpen(false);
@@ -99,10 +106,20 @@ export const Header: React.FC = () => {
     setIsSidebarOpen(prev => !prev);
   };
 
+let Active_lang = "bg-[#00B5E2] text-white"
+
+
+  const handleLanguageSwitch = (lang: string) => {
+    i18n.changeLanguage(lang);
+    dispatch(changeLang({ dir: lang === 'ar' ? 'rtl' : 'ltr', lang }));
+    document.documentElement.setAttribute("lang", lang);
+    document.documentElement.setAttribute("dir", lang === 'ar' ? 'rtl' : 'ltr');  
+  };
+
   return (
     <>
       {/* Main Header */}
-      <header className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm shadow-lg z-40">
+      <header className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm shadow-lg z-40" style={{ direction: 'ltr' }}>
         <nav className="container mx-auto px-4">
         <div className="flex h-16 justify-between items-center">
           {/* Logo */}
@@ -170,7 +187,7 @@ export const Header: React.FC = () => {
           >
             {/* Sidebar Header */}
             <div className="p-6 border-b flex items-center justify-between">
-              <h2 className="text-xl font-cairo font-bold text-gray-800">القائمة</h2>
+              <h2 className="text-xl font-cairo font-bold text-gray-800">{t('navigation.menu')}</h2>
               <button
                 onClick={() => setIsSidebarOpen(false)}
                 className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#00B5E2]/5 transition-colors duration-300 focus:outline-none"
@@ -194,13 +211,13 @@ export const Header: React.FC = () => {
 
             {/* Rest of the sidebar content */}
             <div className="flex-1 overflow-y-auto py-4">
-              <NavLink to="/" onClick={handleLinkClick}>الرئيسية</NavLink>
-              <NavLink to="/about" onClick={handleLinkClick}>عن أورلاندو</NavLink>
-              <NavLink to="/chalets" onClick={handleLinkClick}>جميع الشاليهات</NavLink>
-              <NavLink to="/services" onClick={handleLinkClick}>الخدمات</NavLink>
-              <NavLink to="/faq" onClick={handleLinkClick}>أسئلة شائعة</NavLink>
-              <NavLink to="/contact" onClick={handleLinkClick}>اتصل بنا</NavLink>
-              <NavLink to="/dashboard" onClick={handleLinkClick}>لوحة المدير</NavLink>
+              <NavLink to="/" onClick={handleLinkClick}> {t('navigation.home')}</NavLink>
+              <NavLink to="/about" onClick={handleLinkClick}> {t('navigation.about')}</NavLink>
+              <NavLink to="/chalets" onClick={handleLinkClick}> {t('navigation.chalets')}</NavLink>
+              <NavLink to="/services" onClick={handleLinkClick}> {t('navigation.services')}</NavLink>
+              <NavLink to="/faq" onClick={handleLinkClick}> {t('navigation.faq')}</NavLink>
+              <NavLink to="/contact" onClick={handleLinkClick}> {t('navigation.contact')}</NavLink>
+              <NavLink to="/dashboard" onClick={handleLinkClick}> {t('navigation.dashboard')}</NavLink>
             </div>
 
             {/* Auth Button */}
@@ -210,8 +227,29 @@ export const Header: React.FC = () => {
                     onClick={handleLinkClick}
                 className="block w-full py-3 px-6 bg-[#00B5E2] hover:bg-[#33C3E7] text-white rounded-lg font-cairo font-bold text-center transition-all duration-300 transform hover:scale-[1.02] hover:shadow-md"
                   >
-                تسجيل دخول
+                  {t('navigation.login')}
                   </Link>
+            </div>
+
+            {/* Language Switcher */}
+            <div className="p-6 border-t">
+              <div className="flex items-center justify-center gap-2">
+                <span className="text-sm font-cairo font-medium text-gray-600">{t('language.switch')}</span>
+              </div>
+              <div className="flex gap-2 mt-3 " style={{ direction:'rtl' }}>
+                <button
+                  className={`flex-1 py-2 px-4 ${lang === 'ar' ? Active_lang : 'bg-gray-200 text-gray-700'} rounded-lg font-cairo font-bold text-center transition-all duration-300  hover:scale-[1.02]`}
+                  onClick={() => handleLanguageSwitch('ar')}
+                >
+                  {t('language.arabic')}
+                </button>
+                <button
+                  className={`flex-1 py-2 px-4 ${lang === 'en' ? Active_lang : 'bg-gray-200 text-gray-700'} rounded-lg font-cairo font-bold text-center transition-all duration-300  hover:scale-[1.02]`}
+                  onClick={() => handleLanguageSwitch('en')}
+                >
+                  {t('language.english')}
+                </button>
+              </div>
             </div>
             </motion.div>
           )}
