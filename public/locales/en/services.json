@@ -1,0 +1,72 @@
+{
+  "hero": {
+    "title": "Orlando Resort Services",
+    "subtitle": "We care about your comfort and provide you with a comprehensive experience year-round"
+  },
+  "mainServices": {
+    "title": "Our Core Services",
+    "subtitle": "Everything you need for an unforgettable stay",
+    "services": {
+      "security": {
+        "title": "24/7 Security & Surveillance",
+        "description": "Integrated security system with surveillance cameras and electronic control gates for entrances and exits"
+      },
+      "maintenance": {
+        "title": "Regular Maintenance",
+        "description": "Specialized technical team ready around the clock to solve any problem that may stand in your way"
+      },
+      "pool": {
+        "title": "Diverse Swimming Pools",
+        "description": "Swimming pools specially designed for adults and safe ones dedicated to children"
+      },
+      "beach": {
+        "title": "Private Beach",
+        "description": "Direct and safe access to the beach to enjoy the golden sands"
+      },
+      "playground": {
+        "title": "Children's Play Area",
+        "description": "Safe and diverse play environment equipped with the latest entertainment games for your children"
+      },
+      "cafe": {
+        "title": "Cafes & Restaurants",
+        "description": "A diverse range of cafes and restaurants that meet the highest levels and standards"
+      },
+      "cleaning": {
+        "title": "Cleaning Service",
+        "description": "Professional cleaning service for chalets before your arrival and upon departure to ensure the highest hygiene standards"
+      },
+      "furnished": {
+        "title": "Fully Furnished Chalets",
+        "description": "Chalets fully equipped with luxurious and comfortable furniture to ensure a comfortable stay"
+      }
+    }
+  },
+  "additionalFeatures": {
+    "title": "Additional Features"
+  },
+  "whyOrlando": {
+    "title": "Why Choose Orlando Resort?",
+    "features": {
+      "family": {
+        "title": "Family Environment",
+        "description": "Facilities and services designed to suit all family members and ensure a fun atmosphere"
+      },
+      "experience": {
+        "title": "Comprehensive Experience",
+        "description": "Everything you need in one place, from entertainment to relaxation and seafood"
+      },
+      "comfort": {
+        "title": "Complete Comfort",
+        "description": "We provide you with all means of comfort from luxury chalets to round-the-clock services"
+      }
+    }
+  },
+  "cta": {
+    "title": "Enjoy all these services and more with your stay at Orlando.",
+    "subtitle": "Book now or create your account for an unparalleled experience.",
+    "buttons": {
+      "browseChalets": "Browse Chalets",
+      "createAccount": "Create Your Account"
+    }
+  }
+}

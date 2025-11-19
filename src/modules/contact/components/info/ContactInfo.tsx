@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock, FaWhatsapp } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 
 interface ContactMethod {
   icon: React.ReactNode;
@@ -13,9 +14,10 @@ interface ContactInfoProps {
 }
 
 const ContactInfo: React.FC<ContactInfoProps> = ({ contactMethods }) => {
+  const { t } = useTranslation('contact');
   return (
     <div className="bg-white rounded-xl shadow-sm p-6">
-      <h2 className="text-2xl font-cairo font-semibold mb-6">معلومات التواصل</h2>
+      <h2 className="text-2xl font-cairo font-semibold mb-6">{t('info.title')}</h2>
       <div className="space-y-6">
         {contactMethods.map((method, index) => (
           <motion.div 
@@ -48,30 +50,30 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ contactMethods }) => {
 export const defaultContactMethods: ContactMethod[] = [
   {
     icon: <FaPhone className="text-xl" />,
-    title: 'اتصل بنا',
-    content: '+966 123 456 789'
+    title: 'Phone',
+    content: '+1 234 567 8900'
   },
   {
     icon: <FaWhatsapp className="text-xl" />,
-    title: 'واتساب',
-    content: '+966 123 456 789'
+    title: 'WhatsApp',
+    content: '+1 234 567 8900'
   },
   {
     icon: <FaEnvelope className="text-xl" />,
-    title: 'البريد الإلكتروني',
-    content: 'info@orlando-resort.com'
+    title: 'Email',
+    content: 'info@orlando.com'
   },
   {
     icon: <FaMapMarkerAlt className="text-xl" />,
-    title: 'العنوان',
-    content: 'المملكة العربية السعودية، المنطقة الشرقية'
+    title: 'Address',
+    content: '123 Orlando Street, FL 32801'
   },
   {
     icon: <FaClock className="text-xl" />,
-    title: 'ساعات العمل',
+    title: 'Hours',
     content: [
-      'السبت - الخميس: 9:00 صباحاً - 10:00 مساءً',
-      'الجمعة: 2:00 مساءً - 10:00 مساءً'
+      'Mon-Fri: 9:00 AM - 6:00 PM',
+      'Sat-Sun: 10:00 AM - 4:00 PM'
     ]
   }
 ];

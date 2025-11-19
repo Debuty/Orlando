@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { WHY_ORLANDO } from '../../utils/constants';
+import { useTranslation } from 'react-i18next';
 
 const IconComponent = ({ icon }: { icon: string }) => {
   switch (icon) {
@@ -31,6 +32,7 @@ const IconComponent = ({ icon }: { icon: string }) => {
 };
 
 const WhyOrlando = () => {
+  const { t } = useTranslation('services');
   return (
     <section className="py-16">
       <div className="container mx-auto px-4">
@@ -40,7 +42,7 @@ const WhyOrlando = () => {
           viewport={{ once: true }}
           className="text-3xl font-cairo font-bold text-center mb-12"
         >
-          لماذا نختار منتجع أورلاندو؟
+          {t('whyOrlando.title')}
         </motion.h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
@@ -58,11 +60,11 @@ const WhyOrlando = () => {
               </div>
               
               <h3 className="text-xl font-cairo font-bold text-gray-900 mb-3">
-                {item.title}
+                {t(`whyOrlando.features.${item.key}.title`)}
               </h3>
               
               <p className="text-gray-600 leading-relaxed">
-                {item.description}
+                {t(`whyOrlando.features.${item.key}.description`)}
               </p>
             </motion.div>
           ))}

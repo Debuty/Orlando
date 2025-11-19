@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 const AboutStory = () => {
   const { t } = useTranslation('about');
   return (
-    <section className="py-16">
+    <section className="py-16"> 
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto space-y-16">
           {ABOUT_STORY.map((section, index) => (

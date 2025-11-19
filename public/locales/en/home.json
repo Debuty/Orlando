@@ -34,15 +34,15 @@
     "subtitle": "Choose your perfect accommodation for an unforgettable vacation",
     "chalets": {
       "seaTurquoise": {
-        "name": "Sea Turquoise Chalet",
+        "name": "",
         "features": "Private pool, sea view, equipped kitchen"
       },
       "brightStar": {
-        "name": "Bright Star Chalet",
+        "name": "",
         "features": "Private garden, outdoor seating, equipped kitchen"
       },
       "blueDiamond": {
-        "name": "Blue Diamond Chalet",
+        "name": "",
         "features": "Private pool, jacuzzi, equipped kitchen"
       }
     },

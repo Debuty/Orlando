@@ -4,7 +4,7 @@ import type { Chalet } from "../types";
 export const MOCK_CHALETS: Chalet[] = [
   {
     id: "1",
-    name: "شاليه البحر التركوازي",
+    name: "",
     description: "شاليه فاخر مع إطلالة مباشرة على البحر",
     price: 1200,
     images: ["/images/sea-turquoise-chalet.jpg"],
@@ -15,7 +15,7 @@ export const MOCK_CHALETS: Chalet[] = [
   },
   {
     id: "2",
-    name: "شاليه النجمة المضيئة",
+    name: "",
     description: "شاليه عصري مع تصميم داخلي أنيق",
     price: 900,
     images: ["/images/bright-star-chalet.jpg"],
@@ -26,7 +26,7 @@ export const MOCK_CHALETS: Chalet[] = [
   },
   {
     id: "3",
-    name: "شاليه الماسة الزرقاء",
+    name: "",
     description: "شاليه فاخر مع مسبح خاص",
     price: 1500,
     images: ["/images/blue-diamond-chalet.jpg"],
@@ -37,7 +37,7 @@ export const MOCK_CHALETS: Chalet[] = [
   },
   {
     id: "4",
-    name: "شاليه الواحة الهادئة",
+    name: "",
     description: "شاليه هادئ محاط بالحدائق الخضراء",
     price: 800,
     images: ["/images/about/vision.jpg"],
@@ -48,7 +48,7 @@ export const MOCK_CHALETS: Chalet[] = [
   },
   {
     id: "5",
-    name: "شاليه القمر المنير",
+    name: "",
     description: "شاليه عائلي مع إطلالة على المدينة",
     price: 1100,
     images: ["/images/city-aerial.jpg"],
@@ -59,7 +59,7 @@ export const MOCK_CHALETS: Chalet[] = [
   },
   {
     id: "6",
-    name: "شاليه النخيل الذهبي",
+    name: "",
     description: "شاليه فاخر وسط أشجار النخيل",
     price: 1300,
     images: ["/images/about/story.jpg"],
@@ -70,7 +70,7 @@ export const MOCK_CHALETS: Chalet[] = [
   },
   {
     id: "7",
-    name: "شاليه السماء الزرقاء",
+    name: "",
     description: "شاليه مميز بتصميم عصري وإطلالة بحرية",
     price: 1600,
     images: ["/images/beach-aerial.jpg"],
@@ -81,7 +81,7 @@ export const MOCK_CHALETS: Chalet[] = [
   },
   {
     id: "8",
-    name: "شاليه الصفاء",
+    name: "",
     description: "شاليه هادئ مثالي للاسترخاء",
     price: 950,
     images: ["/images/about/mission.jpg"],
@@ -92,7 +92,7 @@ export const MOCK_CHALETS: Chalet[] = [
   },
   {
     id: "9",
-    name: "شاليه اللؤلؤة",
+    name: "",
     description: "شاليه فاخر بتصميم كلاسيكي أنيق",
     price: 1400,
     images: ["/images/hero-beach-real.jpg"],
@@ -103,7 +103,7 @@ export const MOCK_CHALETS: Chalet[] = [
   },
   {
     id: "10",
-    name: "شاليه الريف",
+    name: "",
     description: "شاليه ريفي محاط بالطبيعة الخلابة",
     price: 850,
     images: ["/images/services-hero.jpg"],
@@ -114,7 +114,7 @@ export const MOCK_CHALETS: Chalet[] = [
   },
   {
     id: "11",
-    name: "شاليه النسيم",
+    name: "",
     description: "شاليه عصري مع نسيم البحر المنعش",
     price: 1250,
     images: ["/images/beach-aerial.jpg"],
@@ -125,7 +125,7 @@ export const MOCK_CHALETS: Chalet[] = [
   },
   {
     id: "12",
-    name: "شاليه الأصالة",
+    name: "",
     description: "شاليه بتصميم تراثي وخدمات عصرية",
     price: 1150,
     images: ["/images/about/story.jpg"],

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { FAQItem } from '../../types';
 import { FaChevronDown } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 
 interface FAQAccordionProps {
   items: FAQItem[];
@@ -9,7 +10,7 @@ interface FAQAccordionProps {
 
 const FAQAccordion: React.FC<FAQAccordionProps> = ({ items }) => {
   const [activeId, setActiveId] = useState<string | null>(null);
-
+  const { t } = useTranslation('faq');
   const toggleAccordion = (id: string) => {
     setActiveId(activeId === id ? null : id);
   };
@@ -25,7 +26,7 @@ const FAQAccordion: React.FC<FAQAccordionProps> = ({ items }) => {
             onClick={() => toggleAccordion(item.id)}
             className="w-full flex items-center justify-between p-4 text-right"
           >
-            <span className="font-semibold text-lg">{item.question}</span>
+            <span className="font-semibold text-lg">{t(`questions.${item.key}.question`)}</span>
             <motion.span
               animate={{ rotate: activeId === item.id ? 180 : 0 }}
               transition={{ duration: 0.2 }}
@@ -44,7 +45,7 @@ const FAQAccordion: React.FC<FAQAccordionProps> = ({ items }) => {
                 className="overflow-hidden"
               >
                 <div className="p-4 pt-0 text-gray-600 leading-relaxed">
-                  {item.answer}
+                  {t(`questions.${item.key}.answer`)}
                 </div>
               </motion.div>
             )}

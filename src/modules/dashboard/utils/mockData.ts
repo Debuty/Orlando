@@ -10,7 +10,7 @@ export const mockStats: DashboardStats = {
 export const mockRecentBookings: RecentBooking[] = [
   {
     id: "1",
-    chaletName: "شاليه البحر التركوازي",
+    chaletName: "شاليه ",
     customerName: "أحمد محمد",
     checkIn: "2024-07-20",
     checkOut: "2024-07-22",
@@ -19,7 +19,7 @@ export const mockRecentBookings: RecentBooking[] = [
   },
   {
     id: "2",
-    chaletName: "شاليه النجمة المضيئة",
+    chaletName: "شاليه ",
     customerName: "سارة عبدالله",
     checkIn: "2024-07-21",
     checkOut: "2024-07-23",
@@ -28,7 +28,7 @@ export const mockRecentBookings: RecentBooking[] = [
   },
   {
     id: "3",
-    chaletName: "شاليه الماسة الزرقاء",
+    chaletName: "شاليه ",
     customerName: "خالد عمر",
     checkIn: "2024-07-22",
     checkOut: "2024-07-25",
@@ -68,7 +68,7 @@ export const mockAlerts: AlertNotification[] = [
   {
     id: "1",
     type: "warning",
-    message: "شاليه البحر التركوازي بحاجة إلى صيانة",
+    message: "شاليه  ",
     date: "2024-07-16T09:00:00",
     isRead: false
   },

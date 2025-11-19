@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion';
 import { MAIN_SERVICES } from '../../utils/constants';
 import ServiceIcon from '../icons/ServiceIcon';
+import { useTranslation } from 'react-i18next';
 
 const ServicesList = () => {
+  const { t } = useTranslation('services');
   return (
     <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
@@ -12,7 +14,7 @@ const ServicesList = () => {
           viewport={{ once: true }}
           className="text-3xl font-cairo font-bold text-center mb-4"
         >
-          الخدمات الأساسية لدينا
+          {t('mainServices.title')}
         </motion.h2>
 
         <motion.p
@@ -22,7 +24,7 @@ const ServicesList = () => {
           transition={{ delay: 0.2 }}
           className="text-gray-600 text-center mb-12"
         >
-          كل ما تحتاجه لإقامة لا تُنسى
+          {t('mainServices.subtitle')}
         </motion.p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
@@ -40,11 +42,11 @@ const ServicesList = () => {
               </div>
               
               <h3 className="text-lg font-cairo font-bold text-gray-900 mb-3">
-                {service.title}
+                {t(`mainServices.services.${service.key}.title`)}
               </h3>
               
               <p className="text-gray-600 text-sm leading-relaxed">
-                {service.description}
+                {t(`mainServices.services.${service.key}.description`)}
               </p>
             </motion.div>
           ))}

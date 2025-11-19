@@ -1,0 +1,70 @@
+{
+  "hero": {
+    "title": "Contact Us",
+    "subtitle": "We're here to help you. You can reach us through any of the following means or fill out the form below"
+  },
+  "form": {
+    "title": "Send us a Message",
+    "fields": {
+      "fullName": {
+        "label": "Full Name",
+        "placeholder": "Enter your full name"
+      },
+      "email": {
+        "label": "Email Address",
+        "placeholder": "Enter your email address"
+      },
+      "phone": {
+        "label": "Phone Number",
+        "placeholder": "Enter your phone number"
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Write your message here..."
+      }
+    },
+    "submitButton": "Send Message"
+  },
+  "info": {
+    "title": "Contact Information",
+    "contactMethods": {
+      "phone": {
+        "title": "Call Us",
+        "content": "+966 123 456 789"
+      },
+      "whatsapp": {
+        "title": "WhatsApp",
+        "content": "+966 123 456 789"
+      },
+      "email": {
+        "title": "Email",
+        "content": "info@orlando-resort.com"
+      },
+      "address": {
+        "title": "Address",
+        "content": "Eastern Province, Saudi Arabia"
+      },
+      "workingHours": {
+        "title": "Working Hours",
+        "content": [
+          "Saturday - Thursday: 9:00 AM - 10:00 PM",
+          "Friday: 2:00 PM - 10:00 PM"
+        ]
+      }
+    }
+  },
+  "map": {
+    "title": "Our Location",
+    "placeholder": "Location Map"
+  },
+  "validation": {
+    "required": "This field is required",
+    "emailInvalid": "Invalid email address",
+    "phoneInvalid": "Invalid phone number"
+  },
+  "messages": {
+    "success": "Your message has been sent successfully",
+    "error": "An error occurred while sending the message"
+  }
+}
+

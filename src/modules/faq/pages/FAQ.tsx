@@ -1,20 +1,22 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import FAQHero from '../components/hero/FAQHero';
 import FAQCategories from '../components/categories/FAQCategories';
 import FAQAccordion from '../components/accordion/FAQAccordion';
-import { FAQ_CONTENT, FAQ_SECTIONS } from '../utils/constants';
+import { FAQ_SECTIONS } from '../utils/constants';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../../../store/index';
 
 const FAQ = () => {
   const [activeCategory, setActiveCategory] = useState(FAQ_SECTIONS[0].category.id);
-
+  const { dir } = useSelector((state: RootState) => state.locale);
   const categories = FAQ_SECTIONS.map(section => section.category);
   const activeSection = FAQ_SECTIONS.find(section => section.category.id === activeCategory);
 
   return (
     <div className="min-h-screen bg-gray-50" >
-      <FAQHero {...FAQ_CONTENT.hero} />
+      <FAQHero />
       
-      <div className="container mx-auto px-4 mb-16">
+      <div className={`container mx-auto px-4 mb-16 ${dir === 'rtl' ? 'text-right' : 'text-left'}`}>
         <FAQCategories
           categories={categories}
           activeCategory={activeCategory}

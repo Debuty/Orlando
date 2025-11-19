@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import type { Variants, Transition } from 'framer-motion';
+import type {  Transition } from 'framer-motion';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 
@@ -23,6 +23,7 @@ const textAnimation: AnimationType = {
 };
 
 const HeroSection: React.FC = () => {
+  
   const navigate = useNavigate();
   const { t } = useTranslation('home');
   const handleNavigation = (path: string): void => {
@@ -56,14 +57,14 @@ const HeroSection: React.FC = () => {
         </motion.h1>
 
         {/* Subtitle with Slide Up + Fade */}
-        {/* <motion.p 
+        <motion.p 
           initial={textAnimation.initial}
           animate={textAnimation.animate}
           transition={{ ...textAnimation.transition, delay: 0.5 }}
           className="text-lg sm:text-xl md:text-2xl mb-8 sm:mb-12 text-white/75"
         >
-          عطلتك الصيفية تبدأ من هنا
-        </motion.p> */}
+          {t('hero.subText')} 
+        </motion.p>
         
         {/* Button Container for both buttons */}
         <div className="flex gap-2 sm:gap-4 justify-center">

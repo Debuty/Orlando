@@ -35,6 +35,7 @@ export interface ChaletsPaginationData {
 export interface Chalet {
   id: string;
   name: string;
+  location: string;
   description: string;
   images: string[];
   price: number;

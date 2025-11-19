@@ -1,0 +1,46 @@
+{
+  "hero": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Answers to the most common questions about Orlando Resort"
+  },
+  "categories": {
+    "booking": "Booking & Payment",
+    "cancellation": "Cancellation & Modification",
+    "amenities": "Facilities & Services"
+  },
+  "questions": {
+   
+      "booking1": {
+        "question": "How can I book a chalet?",
+        "answer": "You can easily book through our website. Choose the suitable chalet, select your stay dates, then follow the simple booking steps."
+      },
+      "booking2": {
+        "question": "What payment methods are available?",
+        "answer": "We accept all major credit cards (Visa, Mastercard) and bank transfers."
+      },
+
+      "cancel1": {
+        "question": "What is the cancellation policy?",
+        "answer": "You can cancel for free up to 48 hours before arrival. After that, fees will apply."
+      },
+      "cancel2": {
+        "question": "Can I modify my booking?",
+        "answer": "Yes, you can modify your booking up to 24 hours before arrival, subject to chalet availability."
+      },
+     
+      "amenities1": {
+        "question": "What facilities are available in the chalets?",
+        "answer": "Facilities include: private pool, fully equipped kitchen, free WiFi, central air conditioning, and private parking."
+      },
+      "amenities2": {
+        "question": "Is room service available?",
+        "answer": "Yes, we provide 24/7 room service with a diverse food menu."
+      }
+    
+  },
+  "common": {
+    "noQuestions": "No questions in this category",
+    "searchPlaceholder": "Search in frequently asked questions...",
+    "contactSupport": "Didn't find an answer? Contact us"
+  }
+}

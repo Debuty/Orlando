@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import type { FAQCategory } from '../../types';
+import { useTranslation } from 'react-i18next';
 
 interface FAQCategoriesProps {
   categories: FAQCategory[];
@@ -13,6 +14,7 @@ const FAQCategories: React.FC<FAQCategoriesProps> = ({
   activeCategory,
   onCategoryChange,
 }) => {
+  const { t } = useTranslation('faq');
   return (
     <div className="flex flex-wrap gap-4 mb-8">
       {categories.map((category, index) => (
@@ -28,7 +30,7 @@ const FAQCategories: React.FC<FAQCategoriesProps> = ({
               : 'bg-white text-gray-600 hover:bg-[#00B5E2]/5'
           }`}
         >
-          {category.name}
+          {t(`categories.${category.key}`)}
         </motion.button>
       ))}
     </div>

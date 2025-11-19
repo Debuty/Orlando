@@ -27,6 +27,32 @@ const ManagerDashboard = () => {
     return `${amount.toLocaleString('ar-SA')} ريال`;
   };
 
+  const statsCards = [
+    {
+      title: "إجمالي الشاليهات",
+      value: mockStats.totalChalets,
+      icon: <HiOutlineHome className="w-6 h-6" />,
+    },
+    {
+      title: "الحجوزات النشطة",
+      value: mockStats.activeBookings,
+      icon: <HiOutlineCalendar className="w-6 h-6" />,
+      trend: { value: 12, isPositive: true },
+    },
+    {
+      title: "الإيرادات",
+      value: formatCurrency(mockStats.totalRevenue),
+      icon: <HiOutlineCash className="w-6 h-6" />,
+      trend: { value: 8, isPositive: true },
+    },
+    {
+      title: "نسبة الإشغال",
+      value: `${mockStats.occupancyRate}%`,
+      icon: <HiOutlineChartBar className="w-6 h-6" />,
+      trend: { value: 5, isPositive: true },
+    },
+  ];
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8">
@@ -36,29 +62,15 @@ const ManagerDashboard = () => {
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <StatsCard
-          title="إجمالي الشاليهات"
-          value={mockStats.totalChalets}
-          icon={<HiOutlineHome className="w-6 h-6" />}
-        />
-        <StatsCard
-          title="الحجوزات النشطة"
-          value={mockStats.activeBookings}
-          icon={<HiOutlineCalendar className="w-6 h-6" />}
-          trend={{ value: 12, isPositive: true }}
-        />
-        <StatsCard
-          title="الإيرادات"
-          value={formatCurrency(mockStats.totalRevenue)}
-          icon={<HiOutlineCash className="w-6 h-6" />}
-          trend={{ value: 8, isPositive: true }}
-        />
-        <StatsCard
-          title="نسبة الإشغال"
-          value={`${mockStats.occupancyRate}%`}
-          icon={<HiOutlineChartBar className="w-6 h-6" />}
-          trend={{ value: 5, isPositive: true }}
-        />
+        {statsCards.map((stat, index) => (
+          <StatsCard
+            key={index}
+            title={stat.title}
+            value={stat.value}
+            icon={stat.icon}
+            trend={stat.trend}
+          />
+        ))}
       </div>
 
       {/* Statistics Charts */}

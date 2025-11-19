@@ -4,7 +4,6 @@ import ContactHero from '../components/hero/ContactHero';
 import ContactForm from '../components/form/ContactForm';
 import ContactInfo, { defaultContactMethods } from '../components/info/ContactInfo';
 import LocationMap from '../components/map/LocationMap';
-import { CONTACT_CONTENT } from '../utils/constants';
 
 const Contact = () => {
   const handleSubmit = (e: React.FormEvent) => {
@@ -15,7 +14,7 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-gray-50" dir="rtl">
-      <ContactHero {...CONTACT_CONTENT.hero} />
+      <ContactHero />
       
       <div className="container mx-auto px-4 mb-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -28,7 +27,7 @@ const Contact = () => {
             className="space-y-8"
           >
             <ContactInfo contactMethods={defaultContactMethods} />
-            <LocationMap {...CONTACT_CONTENT.map} />
+            <LocationMap />
           </motion.div>
         </div>
       </div>

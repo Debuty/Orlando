@@ -74,7 +74,7 @@ const RecentBookings = ({ bookings }: RecentBookingsProps) => {
                   {new Date(booking.checkOut).toLocaleDateString('ar-SA')}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {booking.amount} ريال
+                  {booking.amount} 
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm">
                   <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusColor(booking.status)}`}>

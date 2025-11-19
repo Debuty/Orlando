@@ -38,6 +38,7 @@ i18n
     },
   });
 // Set HTML direction based on language
+
 document.documentElement.lang = initialLanguage;
 document.documentElement.dir = dir;
 

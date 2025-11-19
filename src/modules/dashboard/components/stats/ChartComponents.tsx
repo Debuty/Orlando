@@ -86,22 +86,22 @@ const ChartComponents = ({ revenueData, bookingsData, occupancyData }: ChartComp
         <h3 className="text-lg font-semibold mb-4 text-gray-800">تحليل الإيرادات</h3>
         <div className="h-[300px] w-full">
           <ResponsiveContainer width="100%" height="100%">
-            <AreaChart 
-              data={revenueData} 
+            <AreaChart
+              data={revenueData}
               margin={{ top: 20, right: 30, left: 30, bottom: 20 }}
             >
               <defs>
                 <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#00B5E2" stopOpacity={0.2}/>
-                  <stop offset="95%" stopColor="#00B5E2" stopOpacity={0}/>
+                  <stop offset="5%" stopColor="#00B5E2" stopOpacity={0.2} />
+                  <stop offset="95%" stopColor="#00B5E2" stopOpacity={0} />
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" vertical={false} />
-              <XAxis 
-                dataKey="month" 
+              <XAxis
+                dataKey="month"
                 {...commonXAxisProps}
               />
-              <YAxis 
+              <YAxis
                 {...commonYAxisProps}
                 width={60}
                 tickFormatter={(value) => formatLargeNumber(value)}
@@ -126,7 +126,7 @@ const ChartComponents = ({ revenueData, bookingsData, occupancyData }: ChartComp
                 }}
               />
               <Tooltip
-                contentStyle={{ 
+                contentStyle={{
                   backgroundColor: 'white',
                   border: 'none',
                   borderRadius: '8px',
@@ -165,21 +165,21 @@ const ChartComponents = ({ revenueData, bookingsData, occupancyData }: ChartComp
         <h3 className="text-lg font-semibold mb-4 text-gray-800">تحليل الحجوزات</h3>
         <div className="h-[300px] w-full">
           <ResponsiveContainer width="100%" height="100%">
-            <LineChart 
-              data={bookingsData} 
+            <LineChart
+              data={bookingsData}
               margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
             >
               <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" vertical={false} />
-              <XAxis 
-                dataKey="month" 
+              <XAxis
+                dataKey="month"
                 {...commonXAxisProps}
               />
-              <YAxis 
+              <YAxis
                 {...commonYAxisProps}
                 tickFormatter={(value) => value}
               />
               <Tooltip
-                contentStyle={{ 
+                contentStyle={{
                   backgroundColor: 'white',
                   border: 'none',
                   borderRadius: '8px',
@@ -215,21 +215,21 @@ const ChartComponents = ({ revenueData, bookingsData, occupancyData }: ChartComp
         <h3 className="text-lg font-semibold mb-4 text-gray-800">معدل الإشغال</h3>
         <div className="h-[300px] w-full">
           <ResponsiveContainer width="100%" height="100%">
-            <BarChart 
-              data={occupancyData} 
+            <BarChart
+              data={occupancyData}
               margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
             >
               <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" vertical={false} />
-              <XAxis 
-                dataKey="month" 
+              <XAxis
+                dataKey="month"
                 {...commonXAxisProps}
               />
-              <YAxis 
+              <YAxis
                 {...commonYAxisProps}
                 tickFormatter={(value) => `${value}%`}
               />
               <Tooltip
-                contentStyle={{ 
+                contentStyle={{
                   backgroundColor: 'white',
                   border: 'none',
                   borderRadius: '8px',

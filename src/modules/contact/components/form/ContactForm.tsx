@@ -1,11 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 interface ContactFormProps {
   onSubmit: (e: React.FormEvent) => void;
 }
 
 const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
+  const { t } = useTranslation('contact');
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
@@ -13,11 +15,11 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
       transition={{ duration: 0.5 }}
       className="bg-white rounded-xl shadow-sm p-6 md:p-8"
     >
-      <h2 className="text-2xl font-cairo font-semibold mb-6">أرسل لنا رسالة</h2>
+      <h2 className="text-2xl font-cairo font-semibold mb-6">{t('form.title')}</h2>
       <form onSubmit={onSubmit} className="space-y-6">
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-            الاسم الكامل
+            {t('form.fields.fullName.label')}
           </label>
           <input
             type="text"
@@ -29,7 +31,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
         </div>
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-            البريد الإلكتروني
+            {t('form.fields.email.label')}
           </label>
           <input
             type="email"
@@ -41,7 +43,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
         </div>
         <div>
           <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-            رقم الهاتف
+            {t('form.fields.phone.label')}
           </label>
           <input
             type="tel"
@@ -53,7 +55,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
         </div>
         <div>
           <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-            الرسالة
+            {t('form.fields.message.label')}
           </label>
           <textarea
             id="message"
@@ -67,7 +69,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
           type="submit"
           className="w-full bg-[#00B5E2] hover:bg-[#33C3E7] text-white font-medium py-2 px-6 rounded-lg transition-colors duration-200"
         >
-          إرسال الرسالة
+          {t('form.submitButton')}
         </button>
       </form>
     </motion.div>
