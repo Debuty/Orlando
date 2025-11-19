@@ -4,6 +4,7 @@ import StatsCard from "../components/stats/StatsCard";
 import { mockStats, mockRecentBookings, mockAlerts } from "../utils/mockData";
 
 // Lazy load components
+/////////////
 const RecentBookings = lazy(() => import("../components/bookings/RecentBookings"));
 const AlertsList = lazy(() => import("../components/alerts/AlertsList"));
 const StatisticsCharts = lazy(() => import("../components/stats/StatisticsCharts"));
