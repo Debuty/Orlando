@@ -19,8 +19,15 @@ export function errorHandler(err: unknown, _req: Request, res: Response, _next: 
     });
   }
 
-  console.error(err);
-  return res.status(500).json({ message: 'Internal server error' });
+  console.error('[unhandled]', err);
+  const message =
+    err instanceof Error ? err.message : 'Internal server error';
+
+  // Temporary: surface real message to debug Render/Neon (tighten later)
+  return res.status(500).json({
+    message: 'Internal server error',
+    detail: process.env.NODE_ENV === 'production' ? message : message,
+  });
 }
 
 export function notFound(_req: Request, res: Response) {

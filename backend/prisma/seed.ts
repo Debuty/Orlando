@@ -1,30 +1,19 @@
 import 'dotenv/config';
 import bcrypt from 'bcryptjs';
-import { PrismaMssql } from '@prisma/adapter-mssql';
+import { PrismaPg } from '@prisma/adapter-pg';
+import { Pool } from 'pg';
 import { PrismaClient } from '../src/generated/prisma/client.js';
 
-const server = process.env.DB_SERVER;
-const database = process.env.DB_NAME;
-const user = process.env.DB_USER;
-const password = process.env.DB_PASSWORD;
-
-if (!server || !database || !user || !password) {
-  throw new Error('Missing DB_SERVER / DB_NAME / DB_USER / DB_PASSWORD in .env');
+const connectionString = process.env.DATABASE_URL;
+if (!connectionString) {
+  throw new Error('Missing DATABASE_URL in .env');
 }
 
-const adapter = new PrismaMssql({
-  server,
-  port: Number(process.env.DB_PORT ?? 1433),
-  database,
-  user,
-  password,
-  options: {
-    encrypt: (process.env.DB_ENCRYPT ?? 'true').toLowerCase() === 'true',
-    trustServerCertificate: (process.env.DB_TRUST_SERVER_CERTIFICATE ?? 'true').toLowerCase() === 'true',
-  },
+const pool = new Pool({
+  connectionString,
+  ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : undefined,
 });
-
-const prisma = new PrismaClient({ adapter });
+const prisma = new PrismaClient({ adapter: new PrismaPg(pool) });
 
 const MOCK_CHALETS = [
   {

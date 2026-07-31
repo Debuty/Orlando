@@ -61,7 +61,7 @@ User  * ──── Booking ──── *  Chalet
 | name | string | الاسم الكامل |
 | phone | string | رقم الجوال |
 | passwordHash | string | bcrypt |
-| role | string | `ADMIN` \| `TENANT` (SQL Server: stored as string, validated in app) |
+| role | string | `ADMIN` \| `TENANT` (stored as string, validated in app) |
 | createdAt / updatedAt | datetime | |
 
 ## 2. Chalet
@@ -162,8 +162,8 @@ Stub في المرحلة الأولى (SUCCESS افتراضي).
 
 ## ملاحظات تقنية
 
-- SQL Server لا يدعم Prisma `enum`؛ القيم تُخزَّن كـ `String` وتُفرض في طبقة التطبيق (`src/lib/constants.ts`).
-- بدون `ownerId` على الشاليه في المرحلة الأولى.
+- القيم الـ enum-like تُخزَّن كـ `String` وتُفرض في طبقة التطبيق (`src/lib/constants.ts`).
+- Database: **PostgreSQL** (Prisma provider `postgresql`).
 
 ## خارج النطاق (مرحلة لاحقة)
 

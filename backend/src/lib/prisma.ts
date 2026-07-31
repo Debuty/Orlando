@@ -1,17 +1,12 @@
-import { PrismaMssql } from '@prisma/adapter-mssql';
+import { PrismaPg } from '@prisma/adapter-pg';
+import { Pool } from 'pg';
 import { PrismaClient } from '../generated/prisma/client.js';
 import { env } from '../config/env.js';
 
-const adapter = new PrismaMssql({
-  server: env.db.server,
-  port: env.db.port,
-  database: env.db.database,
-  user: env.db.user,
-  password: env.db.password,
-  options: {
-    encrypt: env.db.encrypt,
-    trustServerCertificate: env.db.trustServerCertificate,
-  },
+const pool = new Pool({
+  connectionString: env.databaseUrl,
+  ssl: env.db.ssl ? { rejectUnauthorized: false } : undefined,
 });
 
+const adapter = new PrismaPg(pool);
 export const prisma = new PrismaClient({ adapter });
