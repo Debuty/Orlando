@@ -1,0 +1,397 @@
+{
+  "info": {
+    "name": "Orlando API",
+    "description": "Orlando backend — Auth, Chalets, Bookings, QR, Dashboard, Contact.\n\nSuggested order:\n1. GET Chalets (no auth)\n2. POST Booking without token → 401\n3. Login Admin → Create Chalet\n4. Signup/Login Tenant → Create Booking\n5. Overlapping booking → 409\n6. Validate QR twice\n7. Dashboard + Alerts\n8. Contact",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000/api" },
+    { "key": "adminToken", "value": "" },
+    { "key": "tenantToken", "value": "" },
+    { "key": "chaletId", "value": "" },
+    { "key": "bookingId", "value": "" },
+    { "key": "qrToken", "value": "" },
+    { "key": "alertId", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "http://localhost:3000/health"
+      }
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Signup Tenant",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json.token) pm.collectionVariables.set('tenantToken', json.token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"سارة عبدالله\",\n  \"email\": \"sara{{$timestamp}}@example.com\",\n  \"phone\": \"0507654321\",\n  \"password\": \"Tenant123!\",\n  \"confirmPassword\": \"Tenant123!\"\n}"
+            },
+            "url": "{{baseUrl}}/auth/signup"
+          }
+        },
+        {
+          "name": "Login Admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json.token) pm.collectionVariables.set('adminToken', json.token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@orlando.com\",\n  \"password\": \"Admin123!\"\n}"
+            },
+            "url": "{{baseUrl}}/auth/login"
+          }
+        },
+        {
+          "name": "Login Tenant",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json.token) pm.collectionVariables.set('tenantToken', json.token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"tenant@orlando.com\",\n  \"password\": \"Tenant123!\"\n}"
+            },
+            "url": "{{baseUrl}}/auth/login"
+          }
+        },
+        {
+          "name": "Me",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{tenantToken}}" }],
+            "url": "{{baseUrl}}/auth/me"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Chalets",
+      "item": [
+        {
+          "name": "List Chalets (public)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json.items && json.items[0]) pm.collectionVariables.set('chaletId', json.items[0].id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/chalets?page=1&perPage=6"
+          }
+        },
+        {
+          "name": "Featured Chalets",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/chalets/featured"
+          }
+        },
+        {
+          "name": "Chalet Details",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/chalets/{{chaletId}}"
+          }
+        },
+        {
+          "name": "Create Chalet (Admin)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json.id) pm.collectionVariables.set('chaletId', json.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"شاليه تجريبي\",\n  \"description\": \"شاليه للاختبار من Postman\",\n  \"location\": \"الشاطئ الشمالي\",\n  \"price\": 1000,\n  \"capacity\": 4,\n  \"rating\": 4.5,\n  \"features\": [\"واي فاي\", \"مسبح خاص\"],\n  \"images\": [\"/images/sea-turquoise-chalet.jpg\"],\n  \"isActive\": true\n}"
+            },
+            "url": "{{baseUrl}}/chalets"
+          }
+        },
+        {
+          "name": "Update Chalet (Admin)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"price\": 1100,\n  \"features\": [\"واي فاي\", \"مسبح خاص\", \"مطبخ مجهز\"]\n}"
+            },
+            "url": "{{baseUrl}}/chalets/{{chaletId}}"
+          }
+        },
+        {
+          "name": "Delete Chalet soft (Admin)",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": "{{baseUrl}}/chalets/{{chaletId}}"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Bookings",
+      "item": [
+        {
+          "name": "Create Booking without token (expect 401)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"chaletId\": \"{{chaletId}}\",\n  \"checkIn\": \"2026-09-01\",\n  \"checkOut\": \"2026-09-03\",\n  \"guestCount\": 2\n}"
+            },
+            "url": "{{baseUrl}}/bookings"
+          }
+        },
+        {
+          "name": "Create Booking (Tenant)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json.booking) {",
+                  "  pm.collectionVariables.set('bookingId', json.booking.id);",
+                  "  if (json.booking.qrCode) pm.collectionVariables.set('qrToken', json.booking.qrCode.token);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{tenantToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"chaletId\": \"{{chaletId}}\",\n  \"checkIn\": \"2026-10-10\",\n  \"checkOut\": \"2026-10-12\",\n  \"guestCount\": 2,\n  \"specialRequests\": \"غرفة هادئة\"\n}"
+            },
+            "url": "{{baseUrl}}/bookings"
+          }
+        },
+        {
+          "name": "Create Overlapping Booking (expect 409)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{tenantToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"chaletId\": \"{{chaletId}}\",\n  \"checkIn\": \"2026-10-11\",\n  \"checkOut\": \"2026-10-13\",\n  \"guestCount\": 2\n}"
+            },
+            "url": "{{baseUrl}}/bookings"
+          }
+        },
+        {
+          "name": "Get Booking Confirmation",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{tenantToken}}" }],
+            "url": "{{baseUrl}}/bookings/{{bookingId}}"
+          }
+        },
+        {
+          "name": "List Bookings (Admin)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": "{{baseUrl}}/bookings?page=1&perPage=20"
+          }
+        },
+        {
+          "name": "Cancel Booking (Admin)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"CANCELLED\"\n}"
+            },
+            "url": "{{baseUrl}}/bookings/{{bookingId}}/status"
+          }
+        }
+      ]
+    },
+    {
+      "name": "QR",
+      "item": [
+        {
+          "name": "Validate QR (first — success)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"{{qrToken}}\"\n}"
+            },
+            "url": "{{baseUrl}}/qr/validate"
+          }
+        },
+        {
+          "name": "Validate QR (second — USED)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{adminToken}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"{{qrToken}}\"\n}"
+            },
+            "url": "{{baseUrl}}/qr/validate"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Dashboard",
+      "item": [
+        {
+          "name": "Stats",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": "{{baseUrl}}/dashboard/stats"
+          }
+        },
+        {
+          "name": "Charts",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": "{{baseUrl}}/dashboard/charts"
+          }
+        },
+        {
+          "name": "Recent Bookings",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": "{{baseUrl}}/dashboard/recent-bookings"
+          }
+        },
+        {
+          "name": "List Alerts",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const json = pm.response.json();",
+                  "if (json.items && json.items[0]) pm.collectionVariables.set('alertId', json.items[0].id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": "{{baseUrl}}/alerts"
+          }
+        },
+        {
+          "name": "Mark Alert Read",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
+            "url": "{{baseUrl}}/alerts/{{alertId}}/read"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Contact",
+      "item": [
+        {
+          "name": "Send Contact Message",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"خالد عمر\",\n  \"email\": \"khaled@example.com\",\n  \"phone\": \"0509876543\",\n  \"message\": \"أريد الاستفسار عن توفر الشاليهات في العيد\"\n}"
+            },
+            "url": "{{baseUrl}}/contact"
+          }
+        }
+      ]
+    }
+  ]
+}

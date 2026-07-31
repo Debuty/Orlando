@@ -1,0 +1,120 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlserver"
+}
+
+// SQL Server does not support Prisma enums — store as strings.
+// Allowed values enforced in application code:
+// Role: ADMIN | TENANT
+// BookingStatus: PENDING | CONFIRMED | CANCELLED
+// PaymentStatus: SUCCESS | FAILED
+// QrStatus: ACTIVE | USED | EXPIRED | REVOKED
+// AlertType: INFO | WARNING | ERROR
+
+model User {
+  id           String    @id @default(cuid()) @db.NVarChar(50)
+  email        String    @unique @db.NVarChar(255)
+  name         String    @db.NVarChar(255)
+  phone        String    @db.NVarChar(50)
+  passwordHash String    @db.NVarChar(255)
+  role         String    @default("TENANT") @db.NVarChar(20)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  bookings     Booking[]
+}
+
+model Chalet {
+  id          String        @id @default(cuid()) @db.NVarChar(50)
+  name        String        @db.NVarChar(255)
+  description String        @db.NVarChar(Max)
+  location    String        @db.NVarChar(255)
+  price       Decimal       @db.Decimal(10, 2)
+  capacity    Int
+  rating      Float?
+  features    String        @db.NVarChar(Max)
+  isActive    Boolean       @default(true)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  images      ChaletImage[]
+  bookings    Booking[]
+}
+
+model ChaletImage {
+  id        String @id @default(cuid()) @db.NVarChar(50)
+  chaletId  String @db.NVarChar(50)
+  url       String @db.NVarChar(500)
+  sortOrder Int    @default(0)
+  chalet    Chalet @relation(fields: [chaletId], references: [id], onDelete: Cascade)
+
+  @@index([chaletId])
+}
+
+model Booking {
+  id              String    @id @default(cuid()) @db.NVarChar(50)
+  userId          String    @db.NVarChar(50)
+  chaletId        String    @db.NVarChar(50)
+  checkIn         DateTime  @db.Date
+  checkOut        DateTime  @db.Date
+  guestCount      Int
+  specialRequests String?   @db.NVarChar(Max)
+  totalPrice      Decimal   @db.Decimal(10, 2)
+  status          String    @default("PENDING") @db.NVarChar(20)
+  bookingCode     String    @unique @db.NVarChar(50)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  user            User      @relation(fields: [userId], references: [id])
+  chalet          Chalet    @relation(fields: [chaletId], references: [id])
+  payment         Payment?
+  qrCodes         QrCode[]
+
+  @@index([chaletId, checkIn, checkOut])
+  @@index([userId])
+  @@index([status])
+}
+
+model QrCode {
+  id        String    @id @default(cuid()) @db.NVarChar(50)
+  bookingId String    @db.NVarChar(50)
+  token     String    @unique @db.NVarChar(100)
+  status    String    @default("ACTIVE") @db.NVarChar(20)
+  validFrom DateTime  @db.Date
+  validTo   DateTime  @db.Date
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+  booking   Booking   @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+
+  @@index([bookingId])
+  @@index([status])
+}
+
+model Payment {
+  id            String   @id @default(cuid()) @db.NVarChar(50)
+  bookingId     String   @unique @db.NVarChar(50)
+  transactionId String   @unique @db.NVarChar(100)
+  status        String   @default("SUCCESS") @db.NVarChar(20)
+  createdAt     DateTime @default(now())
+  booking       Booking  @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid()) @db.NVarChar(50)
+  name      String   @db.NVarChar(255)
+  email     String   @db.NVarChar(255)
+  phone     String   @db.NVarChar(50)
+  message   String   @db.NVarChar(Max)
+  createdAt DateTime @default(now())
+}
+
+model Alert {
+  id        String   @id @default(cuid()) @db.NVarChar(50)
+  type      String   @default("INFO") @db.NVarChar(20)
+  message   String   @db.NVarChar(Max)
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([isRead])
+}

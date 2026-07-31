@@ -1,28 +1,34 @@
-import { configureStore } from '@reduxjs/toolkit';
-import homeReducer from '../modules/home/store/homeSlice';
-import localeSlice from './reducers/localeSlice';
-import { combineReducers } from "@reduxjs/toolkit";
-import storage from "redux-persist/lib/storage";
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import {
   persistStore,
   persistReducer,
-  REGISTER,
-  PURGE,
-  PERSIST,
-  PAUSE,
-  REHYDRATE,
   FLUSH,
-} from "redux-persist";
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import homeReducer from '../modules/home/store/homeSlice';
+import localeSlice from './reducers/localeSlice';
+import authReducer from '../modules/auth/store/authSlice';
+import { orlandoApi } from '../modules/shared/api/orlandoApi';
+import { injectStore } from '../modules/shared/utils/api/storeRef';
+import { syncAuthToken } from '../modules/shared/utils/api/authTokenBridge';
 
 const persistConfig = {
-  key: "root",
+  key: 'root',
   storage,
-  whitelist: ["locale"],
+  // Persist UI locale + auth session only — never RTK Query cache
+  whitelist: ['locale', 'auth'],
 };
 
 const rootReducer = combineReducers({
   locale: localeSlice,
   home: homeReducer,
+  auth: authReducer,
+  [orlandoApi.reducerPath]: orlandoApi.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -34,11 +40,15 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    }).concat(orlandoApi.middleware),
 });
 
-export const persistor = persistStore(store);
+injectStore(store);
+
+export const persistor = persistStore(store, null, () => {
+  // After rehydrate: put token back into Axios bridge
+  syncAuthToken(store.getState().auth.token);
+});
 
 export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch; 
- 
+export type AppDispatch = typeof store.dispatch;
