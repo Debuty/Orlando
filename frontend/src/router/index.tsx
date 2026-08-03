@@ -22,20 +22,42 @@ const Signup = lazy(() => import('../modules/auth/pages/Signup'));
 const BookingConfirmation = lazy(() => import('../modules/booking/pages/BookingConfirmation'));
 const WebSocketTest = lazy(() => import('../modules/websocket-test/pages/WebSocketTest'));
 import HomePage from './../modules/home/pages/HomePage';
+import { AdminRoute, GuestOnlyRoute } from '../modules/auth/components/AuthRoutes';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<HomePage />} />
-      <Route path="dashboard" element={<ManagerDashboard />} />
+      <Route
+        path="dashboard"
+        element={
+          <AdminRoute>
+            <ManagerDashboard />
+          </AdminRoute>
+        }
+      />
       <Route path="chalets" element={<Chalets />} />
       <Route path="chalets/:id" element={<ChaletDetails />} />
       <Route path="services" element={<Services />} />
       <Route path="about" element={<About />} />
       <Route path="contact" element={<Contact />} />
       <Route path="faq" element={<FAQ />} />
-      <Route path="login" element={<Login />} />
-      <Route path="signup" element={<Signup />} />
+      <Route
+        path="login"
+        element={
+          <GuestOnlyRoute>
+            <Login />
+          </GuestOnlyRoute>
+        }
+      />
+      <Route
+        path="signup"
+        element={
+          <GuestOnlyRoute>
+            <Signup />
+          </GuestOnlyRoute>
+        }
+      />
       <Route path="booking/:bookingId/confirmation" element={<BookingConfirmation />} />
       <Route path="websocket-test" element={<WebSocketTest />} />
     </Route>

@@ -9,7 +9,9 @@
     "login": "Login",
     "signup": "Sign Up",
     "dashboard": "Manager Dashboard",
-    "menu": "Menu"
+    "menu": "Menu",
+    "profile": "Profile",
+    "logout": "Log out"
   },
   "buttons": {
     "bookNow": "Book Now",
@@ -31,5 +33,10 @@
     "switch": "Language",
     "arabic": "عربي",
     "english": "English"
+  },
+  "booking": {
+    "loginRequiredTitle": "Log in to book",
+    "loginRequiredMessage": "Please sign in first so you can book this chalet.",
+    "loginToBook": "Log in to book"
   }
 }

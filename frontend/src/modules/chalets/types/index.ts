@@ -1,14 +1,14 @@
 export interface ChaletBooking {
   checkIn: string;
   checkOut: string;
-  status: 'pending' | 'confirmed' | 'cancelled';
+  status: string;
 }
 
 export interface ChaletInfo {
   id: string;
   name: string;
   price: number;
-  rating: number;
+  rating: number | null;
   images: string[];
   description: string;
   amenities: string[];
@@ -41,5 +41,6 @@ export interface Chalet {
   price: number;
   capacity: number;
   features: string[];
-  rating?: number;
-} 
+  rating?: number | null;
+  isActive?: boolean;
+}

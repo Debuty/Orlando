@@ -1,0 +1,51 @@
+{
+  "createChalet": {
+    "title": "إنشاء شاليه جديد",
+    "subtitle": "أدخل بيانات الشاليه وأرسلها للخادم.",
+    "toggleShow": "إنشاء شاليه",
+    "toggleHide": "إخفاء النموذج",
+    "fields": {
+      "name": { "label": "اسم الشاليه", "placeholder": "مثال: شاليه البحر الأزرق" },
+      "description": { "label": "الوصف", "placeholder": "وصف مختصر للشاليه..." },
+      "location": { "label": "الموقع", "placeholder": "مثال: الساحل الشمالي" },
+      "price": { "label": "السعر / ليلة", "placeholder": "850" },
+      "capacity": { "label": "السعة (أشخاص)", "placeholder": "6" },
+      "rating": { "label": "التقييم (اختياري)", "placeholder": "4.5" },
+      "features": {
+        "label": "المميزات",
+        "placeholder": "مثال: مسبح خاص",
+        "add": "إضافة"
+      },
+      "images": {
+        "label": "روابط الصور",
+        "placeholder": "https://example.com/image.jpg",
+        "add": "إضافة صورة"
+      },
+      "isActive": "الشاليه نشط ومتاح للحجز"
+    },
+    "submit": "حفظ الشاليه",
+    "reset": "مسح",
+    "previewPayload": "معاينة البيانات (مؤقت)",
+    "messages": {
+      "success": "تم إنشاء الشاليه بنجاح",
+      "error": "فشل إنشاء الشاليه",
+      "submitting": "جاري الحفظ..."
+    },
+    "validation": {
+      "required": "هذا الحقل مطلوب",
+      "nameMin": "الاسم قصير جداً",
+      "descriptionMin": "الوصف يجب ألا يقل عن 10 أحرف",
+      "priceInvalid": "أدخل سعراً صحيحاً",
+      "pricePositive": "السعر يجب أن يكون أكبر من صفر",
+      "capacityInvalid": "أدخل سعة صحيحة",
+      "capacityMin": "السعة يجب ألا تقل عن 1",
+      "ratingRange": "التقييم بين 0 و 5",
+      "imageUrl": "رابط صورة غير صالح",
+      "imagesMin": "أضف صورة واحدة على الأقل",
+      "featureEmpty": "أدخل ميزة قبل الإضافة",
+      "imageEmpty": "أدخل رابط الصورة قبل الإضافة",
+      "featureDuplicate": "الميزة موجودة مسبقاً",
+      "imageDuplicate": "الرابط موجود مسبقاً"
+    }
+  }
+}

@@ -9,7 +9,9 @@
     "login": "تسجيل دخول",
     "signup": "انشاء حساب",
     "dashboard": "لوحة المدير",
-    "menu": "القائمة"
+    "menu": "القائمة",
+    "profile": "الملف الشخصي",
+    "logout": "تسجيل الخروج"
   },
   "buttons": {
     "bookNow": "احجز الآن",
@@ -31,5 +33,10 @@
     "switch": "اللغة",
     "arabic": "عربي",
     "english": "English"
+  },
+  "booking": {
+    "loginRequiredTitle": "سجل دخولك للحجز",
+    "loginRequiredMessage": "يجب تسجيل الدخول أولاً حتى تتمكن من حجز هذا الشاليه.",
+    "loginToBook": "تسجيل الدخول للحجز"
   }
 }

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import type {  Transition } from 'framer-motion';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../../../auth/hooks/useAuth';
 
 type AnimationType = {
   initial: Record<string, number>;
@@ -26,6 +27,7 @@ const HeroSection: React.FC = () => {
   
   const navigate = useNavigate();
   const { t } = useTranslation('home');
+  const { isGuest } = useAuth();
   const handleNavigation = (path: string): void => {
     navigate(path);
   };
@@ -76,13 +78,14 @@ const HeroSection: React.FC = () => {
             {t('hero.buttons.browse')}
           </button>
 
-          {/* Secondary Button - Create Account */}
-          <button
-            onClick={() => handleNavigation('/signup')}
-            className="bg-transparent border-2 border-[#00B5E2] text-white hover:bg-[#00B5E2] hover:text-white px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 rounded-lg text-base sm:text-lg md:text-xl font-bold tracking-wide transition-all duration-200"
-          >
-            {t('hero.buttons.createAccount')}
-          </button>
+          {isGuest && (
+            <button
+              onClick={() => handleNavigation('/signup')}
+              className="bg-transparent border-2 border-[#00B5E2] text-white hover:bg-[#00B5E2] hover:text-white px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 rounded-lg text-base sm:text-lg md:text-xl font-bold tracking-wide transition-all duration-200"
+            >
+              {t('hero.buttons.createAccount')}
+            </button>
+          )}
         </div>
       </div>
     </section>

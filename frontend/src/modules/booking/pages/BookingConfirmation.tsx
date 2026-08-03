@@ -1,74 +1,104 @@
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import QRCode from 'qrcode';
-import type { BookingConfirmation as BookingConfirmationType } from '../types';
+import { useGetBookingByIdQuery } from '../../shared/api/orlandoApi';
 
 const BookingConfirmation = () => {
   const { bookingId } = useParams<{ bookingId: string }>();
   const navigate = useNavigate();
-  const [confirmation, setConfirmation] = useState<BookingConfirmationType | null>(null);
-  const [qrCodeImage, setQrCodeImage] = useState<string>('');
+  const [qrCodeImage, setQrCodeImage] = useState('');
+
+  const { data, isLoading, isError, error } = useGetBookingByIdQuery(
+    bookingId ?? '',
+    { skip: !bookingId }
+  );
+
+  const booking = data?.booking;
+  const paymentStatus = data?.paymentStatus;
+  const transactionId = data?.transactionId;
 
   useEffect(() => {
-    // TODO: Replace with actual API call
-    const mockConfirmation: BookingConfirmationType = {
-      booking: {
-        id: bookingId || '',
-        userId: 'user123',
-        chaletId: 'chalet456',
-        checkIn: '2024-03-25',
-        checkOut: '2024-03-27',
-        guestCount: 2,
-        totalPrice: 1700,
-        createdAt: new Date().toISOString(),
-        status: 'confirmed',
-        qrCode: '',
-        bookingCode: 'ORD-' + Math.random().toString(36).substring(2, 8).toUpperCase()
-      },
-      paymentStatus: 'success',
-      transactionId: 'TXN' + Date.now()
-    };
+    if (!booking) {
+      setQrCodeImage('');
+      return;
+    }
 
-    setConfirmation(mockConfirmation);
-
-    // Generate QR code
     const generateQRCode = async () => {
       try {
-        const qrData = JSON.stringify({
-          bookingCode: mockConfirmation.booking.bookingCode,
-          chaletId: mockConfirmation.booking.chaletId,
-          validFrom: mockConfirmation.booking.checkIn,
-          validTo: mockConfirmation.booking.checkOut
-        });
+        const qrPayload =
+          booking.qrCode?.token ??
+          JSON.stringify({
+            bookingCode: booking.bookingCode,
+            chaletId: booking.chaletId,
+            validFrom: booking.checkIn,
+            validTo: booking.checkOut,
+          });
 
-        const qrImage = await QRCode.toDataURL(qrData, {
+        const qrImage = await QRCode.toDataURL(qrPayload, {
           width: 300,
           margin: 2,
           color: {
             dark: '#00B5E2',
-            light: '#FFFFFF'
-          }
+            light: '#FFFFFF',
+          },
         });
-
         setQrCodeImage(qrImage);
       } catch (err) {
         console.error('Error generating QR code:', err);
       }
     };
 
-    generateQRCode();
-  }, [bookingId]);
+    void generateQRCode();
+  }, [booking]);
 
-  if (!confirmation) {
+  if (!bookingId) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-4 border-[#00B5E2] border-t-transparent"></div>
+      <div className="container mx-auto px-4 py-16 text-center text-gray-600" dir="rtl">
+        معرّف الحجز غير صالح.
+        <div className="mt-4">
+          <Link to="/chalets" className="text-[#00B5E2] hover:underline">
+            العودة للشاليهات
+          </Link>
+        </div>
       </div>
     );
   }
 
-  const { booking } = confirmation;
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-4 border-[#00B5E2] border-t-transparent" />
+      </div>
+    );
+  }
+
+  if (isError || !booking) {
+    return (
+      <div className="container mx-auto px-4 py-16 text-center" dir="rtl">
+        <p className="text-red-600 mb-4">
+          {(error && 'message' in error && String(error.message)) ||
+            'تعذر تحميل تفاصيل الحجز.'}
+        </p>
+        <button
+          type="button"
+          onClick={() => navigate('/chalets')}
+          className="text-[#00B5E2] hover:underline"
+        >
+          العودة للشاليهات
+        </button>
+      </div>
+    );
+  }
+
+  const statusLabel =
+    booking.status?.toLowerCase() === 'confirmed'
+      ? 'تم التأكيد'
+      : booking.status?.toLowerCase() === 'pending'
+        ? 'قيد الانتظار'
+        : booking.status?.toLowerCase() === 'cancelled'
+          ? 'ملغي'
+          : booking.status;
 
   return (
     <div className="container mx-auto px-4 py-8" dir="rtl">
@@ -79,12 +109,28 @@ const BookingConfirmation = () => {
       >
         <div className="text-center mb-8">
           <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-8 w-8 text-green-500"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
             </svg>
           </div>
           <h1 className="text-2xl font-bold text-gray-900 mb-2">تم تأكيد الحجز!</h1>
-          <p className="text-gray-600">شكراً لاختيارك أورلاندو. تم تأكيد حجزك بنجاح.</p>
+          <p className="text-gray-600">
+            شكراً لاختيارك أورلاندو. تم تأكيد حجزك بنجاح.
+          </p>
+          {booking.chaletName && (
+            <p className="mt-2 font-semibold text-[#00B5E2]">{booking.chaletName}</p>
+          )}
         </div>
 
         <div className="border-t border-b py-6 mb-6">
@@ -95,15 +141,19 @@ const BookingConfirmation = () => {
             </div>
             <div>
               <p className="text-gray-600 mb-1">الحالة</p>
-              <p className="font-semibold text-green-600">تم التأكيد</p>
+              <p className="font-semibold text-green-600">{statusLabel}</p>
             </div>
             <div>
               <p className="text-gray-600 mb-1">تاريخ الوصول</p>
-              <p className="font-semibold">{new Date(booking.checkIn).toLocaleDateString('ar-SA')}</p>
+              <p className="font-semibold">
+                {new Date(booking.checkIn).toLocaleDateString('ar-SA')}
+              </p>
             </div>
             <div>
               <p className="text-gray-600 mb-1">تاريخ المغادرة</p>
-              <p className="font-semibold">{new Date(booking.checkOut).toLocaleDateString('ar-SA')}</p>
+              <p className="font-semibold">
+                {new Date(booking.checkOut).toLocaleDateString('ar-SA')}
+              </p>
             </div>
             <div>
               <p className="text-gray-600 mb-1">عدد الضيوف</p>
@@ -113,6 +163,20 @@ const BookingConfirmation = () => {
               <p className="text-gray-600 mb-1">المبلغ الإجمالي</p>
               <p className="font-semibold">{booking.totalPrice} ريال</p>
             </div>
+            {transactionId && (
+              <div className="col-span-2">
+                <p className="text-gray-600 mb-1">رقم العملية</p>
+                <p className="font-semibold break-all">{transactionId}</p>
+              </div>
+            )}
+            {paymentStatus && (
+              <div className="col-span-2">
+                <p className="text-gray-600 mb-1">حالة الدفع</p>
+                <p className="font-semibold">
+                  {paymentStatus === 'success' ? 'ناجح' : paymentStatus}
+                </p>
+              </div>
+            )}
           </div>
         </div>
 
@@ -122,31 +186,35 @@ const BookingConfirmation = () => {
             يرجى إظهار رمز QR عند تسجيل الوصول للدخول إلى الشاليه
           </p>
           <div className="bg-white p-4 rounded-lg inline-block shadow-sm">
-            {qrCodeImage && (
+            {qrCodeImage ? (
               <img
                 src={qrCodeImage}
                 alt="QR Code"
                 className="mx-auto"
                 style={{ maxWidth: '200px' }}
               />
+            ) : (
+              <p className="text-sm text-gray-500">جاري إنشاء الرمز...</p>
             )}
           </div>
         </div>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button
+            type="button"
+            disabled={!qrCodeImage}
             onClick={() => {
-              // Download QR code
               const link = document.createElement('a');
               link.href = qrCodeImage;
               link.download = `orlando-booking-${booking.bookingCode}.png`;
               link.click();
             }}
-            className="bg-[#00B5E2] text-white px-6 py-2 rounded-lg hover:bg-[#33C3E7] transition-colors"
+            className="bg-[#00B5E2] text-white px-6 py-2 rounded-lg hover:bg-[#33C3E7] transition-colors disabled:opacity-50"
           >
             تحميل رمز QR
           </button>
           <button
+            type="button"
             onClick={() => navigate('/chalets')}
             className="border border-[#00B5E2] text-[#00B5E2] px-6 py-2 rounded-lg hover:bg-[#00B5E2]/5 transition-colors"
           >
@@ -158,4 +226,4 @@ const BookingConfirmation = () => {
   );
 };
 
-export default BookingConfirmation; 
+export default BookingConfirmation;

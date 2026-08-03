@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Variants } from 'framer-motion';
 import { Logo } from './Logo';
@@ -7,7 +7,10 @@ import { changeLang } from '../../../../store/reducers/localeSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import i18n from '../../../../i18n/i18n';
-import type { RootState } from '../../../../store';
+import type { AppDispatch, RootState } from '../../../../store';
+import { useAuth } from '../../../auth/hooks/useAuth';
+import { logout } from '../../../auth/store/authSlice';
+import { orlandoApi } from '../../../shared/api/orlandoApi';
 
 const sidebarVariants: Variants = {
   open: {
@@ -71,9 +74,11 @@ const NavLink = ({ to, children, onClick }: { to: string; children: React.ReactN
 export const Header: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const location = useLocation();
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
   const { t } = useTranslation('common');
   const lang = useSelector((state: RootState) => state.locale.lang);
+  const { isGuest, isTenant, isAdmin } = useAuth();
   // Close sidebar on route change
   useEffect(() => {
     setIsSidebarOpen(false);
@@ -102,6 +107,13 @@ export const Header: React.FC = () => {
 
   const toggleSidebar = () => {
     setIsSidebarOpen(prev => !prev);
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+    dispatch(orlandoApi.util.resetApiState());
+    setIsSidebarOpen(false);
+    navigate('/', { replace: true });
   };
 
   let Active_lang = "bg-[#00B5E2] text-white"
@@ -212,18 +224,47 @@ export const Header: React.FC = () => {
               <NavLink to="/services" onClick={handleLinkClick}> {t('navigation.services')}</NavLink>
               <NavLink to="/faq" onClick={handleLinkClick}> {t('navigation.faq')}</NavLink>
               <NavLink to="/contact" onClick={handleLinkClick}> {t('navigation.contact')}</NavLink>
-              <NavLink to="/dashboard" onClick={handleLinkClick}> {t('navigation.dashboard')}</NavLink>
+              {isAdmin && (
+                <NavLink to="/dashboard" onClick={handleLinkClick}> {t('navigation.dashboard')}</NavLink>
+              )}
             </div>
 
-            {/* Auth Button */}
+            {/* Auth / Profile */}
             <div className="p-6 border-t">
-              <Link
-                to="/login"
-                onClick={handleLinkClick}
-                className="block w-full py-3 px-6 bg-[#00B5E2] hover:bg-[#33C3E7] text-white rounded-lg font-cairo font-bold text-center transition-all duration-300 transform hover:scale-[1.02] hover:shadow-md"
-              >
-                {t('navigation.login')}
-              </Link>
+              {isGuest && (
+                <Link
+                  to="/login"
+                  onClick={handleLinkClick}
+                  className="block w-full py-3 px-6 bg-[#00B5E2] hover:bg-[#33C3E7] text-white rounded-lg font-cairo font-bold text-center transition-all duration-300 transform hover:scale-[1.02] hover:shadow-md"
+                >
+                  {t('navigation.login')}
+                </Link>
+              )}
+              {(isTenant || isAdmin) && (
+                <div className="flex items-center justify-center gap-3">
+                  <button
+                    type="button"
+                    aria-label={t('navigation.profile')}
+                    className="flex h-12 w-12 items-center justify-center rounded-full bg-[#00B5E2]/10 text-[#00B5E2] transition-colors hover:bg-[#00B5E2]/20"
+                  >
+                    <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden>
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={1.75}
+                        d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                      />
+                    </svg>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleLogout}
+                    className="rounded-lg border border-gray-200 px-4 py-2.5 font-cairo text-sm font-bold text-gray-700 transition-colors hover:border-red-200 hover:bg-red-50 hover:text-red-600"
+                  >
+                    {t('navigation.logout')}
+                  </button>
+                </div>
+              )}
             </div>
 
             {/* Language Switcher */}

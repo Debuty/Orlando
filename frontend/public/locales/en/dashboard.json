@@ -1,0 +1,51 @@
+{
+  "createChalet": {
+    "title": "Create new chalet",
+    "subtitle": "Enter chalet details and save them to the server.",
+    "toggleShow": "Create chalet",
+    "toggleHide": "Hide form",
+    "fields": {
+      "name": { "label": "Chalet name", "placeholder": "e.g. Blue Sea Chalet" },
+      "description": { "label": "Description", "placeholder": "Short description..." },
+      "location": { "label": "Location", "placeholder": "e.g. North Coast" },
+      "price": { "label": "Price / night", "placeholder": "850" },
+      "capacity": { "label": "Capacity (guests)", "placeholder": "6" },
+      "rating": { "label": "Rating (optional)", "placeholder": "4.5" },
+      "features": {
+        "label": "Features",
+        "placeholder": "e.g. Private pool",
+        "add": "Add"
+      },
+      "images": {
+        "label": "Image URLs",
+        "placeholder": "https://example.com/image.jpg",
+        "add": "Add image"
+      },
+      "isActive": "Chalet is active and bookable"
+    },
+    "submit": "Save chalet",
+    "reset": "Clear",
+    "previewPayload": "Payload preview (temporary)",
+    "messages": {
+      "success": "Chalet created successfully",
+      "error": "Failed to create chalet",
+      "submitting": "Saving..."
+    },
+    "validation": {
+      "required": "This field is required",
+      "nameMin": "Name is too short",
+      "descriptionMin": "Description must be at least 10 characters",
+      "priceInvalid": "Enter a valid price",
+      "pricePositive": "Price must be greater than zero",
+      "capacityInvalid": "Enter a valid capacity",
+      "capacityMin": "Capacity must be at least 1",
+      "ratingRange": "Rating must be between 0 and 5",
+      "imageUrl": "Invalid image URL",
+      "imagesMin": "Add at least one image",
+      "featureEmpty": "Enter a feature before adding",
+      "imageEmpty": "Enter an image URL before adding",
+      "featureDuplicate": "Feature already added",
+      "imageDuplicate": "URL already added"
+    }
+  }
+}

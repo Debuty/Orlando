@@ -1,9 +1,11 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../../../auth/hooks/useAuth';
 
 const CallToAction = () => {
   const { t } = useTranslation('services');
+  const { isGuest } = useAuth();
   return (
     <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
@@ -34,12 +36,14 @@ const CallToAction = () => {
             >
               {t('cta.buttons.browseChalets')}
             </Link>
-            <Link
-              to="/signup"
-              className="bg-white text-[#00B5E2] border-2 border-[#00B5E2] px-8 py-3 rounded-lg font-bold hover:bg-[#00B5E2]/5 transition-colors"
-            >
-              {t('cta.buttons.createAccount')}
-            </Link>
+            {isGuest && (
+              <Link
+                to="/signup"
+                className="bg-white text-[#00B5E2] border-2 border-[#00B5E2] px-8 py-3 rounded-lg font-bold hover:bg-[#00B5E2]/5 transition-colors"
+              >
+                {t('cta.buttons.createAccount')}
+              </Link>
+            )}
           </div>
         </div>
       </div>
