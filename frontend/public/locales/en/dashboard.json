@@ -1,4 +1,80 @@
 {
+  "header": {
+    "title": "Manager Dashboard",
+    "subtitle": "Welcome to the village manager dashboard"
+  },
+  "stats": {
+    "totalChalets": "Total chalets",
+    "activeBookings": "Active bookings",
+    "totalRevenue": "Revenue",
+    "occupancyRate": "Occupancy rate",
+    "currency": "SAR",
+    "error": "Failed to load statistics"
+  },
+  "charts": {
+    "revenue": "Revenue analysis",
+    "bookings": "Bookings analysis",
+    "occupancy": "Occupancy rate",
+    "error": "Failed to load charts",
+    "loading": "Loading charts..."
+  },
+  "recentBookings": {
+    "title": "Recent bookings",
+    "empty": "No bookings yet",
+    "error": "Failed to load bookings",
+    "columns": {
+      "chalet": "Chalet",
+      "customer": "Customer",
+      "checkIn": "Check-in",
+      "checkOut": "Check-out",
+      "amount": "Amount",
+      "status": "Status"
+    },
+    "status": {
+      "confirmed": "Confirmed",
+      "pending": "Pending",
+      "cancelled": "Cancelled"
+    },
+    "pagination": {
+      "label": "Bookings pagination",
+      "prev": "Previous",
+      "next": "Next",
+      "pageOf": "Page {{page}} of {{totalPages}}"
+    }
+  },
+  "alerts": {
+    "title": "Alerts",
+    "empty": "No alerts",
+    "error": "Failed to load alerts",
+    "markRead": "Mark as read"
+  },
+  "qrValidate": {
+    "title": "Validate QR code",
+    "subtitle": "Paste the token or scan a booking QR that opens this page with the token",
+    "tokenLabel": "Token",
+    "tokenPlaceholder": "QR-XXXX or full URL",
+    "submit": "Validate",
+    "submitting": "Validating...",
+    "successTitle": "Access granted",
+    "failTitle": "Access denied",
+    "fields": {
+      "customer": "Guest",
+      "chalet": "Chalet",
+      "bookingCode": "Booking code",
+      "checkIn": "Check-in",
+      "checkOut": "Check-out",
+      "guests": "Guests"
+    },
+    "reasons": {
+      "NOT_FOUND": "Unknown code",
+      "USED": "Code already used",
+      "EXPIRED": "Code expired",
+      "REVOKED": "Code revoked",
+      "BOOKING_CANCELLED": "Booking cancelled",
+      "UNKNOWN": "Validation failed"
+    },
+    "error": "Could not validate the code"
+  },
   "createChalet": {
     "title": "Create new chalet",
     "subtitle": "Enter chalet details and save them to the server.",

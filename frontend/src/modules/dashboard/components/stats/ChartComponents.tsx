@@ -5,9 +5,22 @@ interface ChartComponentsProps {
   revenueData: Array<{ month: string; amount: number }>;
   bookingsData: Array<{ month: string; bookings: number }>;
   occupancyData: Array<{ month: string; rate: number }>;
+  titles?: {
+    revenue?: string;
+    bookings?: string;
+    occupancy?: string;
+  };
 }
 
-const ChartComponents = ({ revenueData, bookingsData, occupancyData }: ChartComponentsProps) => {
+const ChartComponents = ({
+  revenueData,
+  bookingsData,
+  occupancyData,
+  titles,
+}: ChartComponentsProps) => {
+  const revenueTitle = titles?.revenue ?? 'تحليل الإيرادات';
+  const bookingsTitle = titles?.bookings ?? 'تحليل الحجوزات';
+  const occupancyTitle = titles?.occupancy ?? 'معدل الإشغال';
   // Format large numbers with K/M
   const formatLargeNumber = (num: number) => {
     if (num >= 1000000) {
@@ -83,7 +96,7 @@ const ChartComponents = ({ revenueData, bookingsData, occupancyData }: ChartComp
         transition={{ duration: 0.5, delay: 0.2 }}
         className="bg-white p-6 rounded-lg shadow-sm"
       >
-        <h3 className="text-lg font-semibold mb-4 text-gray-800">تحليل الإيرادات</h3>
+        <h3 className="text-lg font-semibold mb-4 text-gray-800">{revenueTitle}</h3>
         <div className="h-[300px] w-full">
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart
@@ -162,7 +175,7 @@ const ChartComponents = ({ revenueData, bookingsData, occupancyData }: ChartComp
         transition={{ duration: 0.5, delay: 0.3 }}
         className="bg-white p-6 rounded-lg shadow-sm"
       >
-        <h3 className="text-lg font-semibold mb-4 text-gray-800">تحليل الحجوزات</h3>
+        <h3 className="text-lg font-semibold mb-4 text-gray-800">{bookingsTitle}</h3>
         <div className="h-[300px] w-full">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
@@ -212,7 +225,7 @@ const ChartComponents = ({ revenueData, bookingsData, occupancyData }: ChartComp
         transition={{ duration: 0.5, delay: 0.4 }}
         className="bg-white p-6 rounded-lg shadow-sm lg:col-span-2"
       >
-        <h3 className="text-lg font-semibold mb-4 text-gray-800">معدل الإشغال</h3>
+        <h3 className="text-lg font-semibold mb-4 text-gray-800">{occupancyTitle}</h3>
         <div className="h-[300px] w-full">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart

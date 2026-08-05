@@ -132,15 +132,21 @@ dashboardRouter.get('/charts', async (_req, res, next) => {
 
 dashboardRouter.get('/recent-bookings', async (req, res, next) => {
   try {
-    const limit = Math.min(Number(req.query.limit ?? 10), 50);
-    const bookings = await prisma.booking.findMany({
-      take: limit,
-      orderBy: { createdAt: 'desc' },
-      include: {
-        user: { select: { name: true } },
-        chalet: { select: { name: true } },
-      },
-    });
+    const page = Math.max(1, Number(req.query.page ?? 1) || 1);
+    const size = Math.min(50, Math.max(1, Number(req.query.size ?? 10) || 10));
+
+    const [bookings, totalItems] = await Promise.all([
+      prisma.booking.findMany({
+        skip: (page - 1) * size,
+        take: size,
+        orderBy: { createdAt: 'desc' },
+        include: {
+          user: { select: { name: true } },
+          chalet: { select: { name: true } },
+        },
+      }),
+      prisma.booking.count(),
+    ]);
 
     res.json({
       items: bookings.map((b) => ({
@@ -152,6 +158,12 @@ dashboardRouter.get('/recent-bookings', async (req, res, next) => {
         status: b.status.toLowerCase(),
         amount: Number(b.totalPrice),
       })),
+      pagination: {
+        currentPage: page,
+        totalPages: Math.max(1, Math.ceil(totalItems / size)),
+        totalItems,
+        itemsPerPage: size,
+      },
     });
   } catch (err) {
     next(err);
@@ -165,6 +177,7 @@ alertsRouter.use(authenticate, authorize('ADMIN'));
 alertsRouter.get('/', async (_req, res, next) => {
   try {
     const alerts = await prisma.alert.findMany({
+      where: { isRead: false },
       orderBy: { createdAt: 'desc' },
       take: 50,
     });

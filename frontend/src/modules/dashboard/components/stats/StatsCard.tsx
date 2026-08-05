@@ -1,5 +1,10 @@
-import { motion, useMotionValue, useTransform, animate, useAnimation } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import {
+  motion,
+  useMotionValue,
+  animate,
+  useAnimation,
+} from "framer-motion";
+import { useEffect, useState } from "react";
 
 interface StatsCardProps {
   title: string;
@@ -15,23 +20,16 @@ const StatsCard = ({ title, value, icon, trend }: StatsCardProps) => {
   const controls = useAnimation();
   const count = useMotionValue(0);
   const [displayValue, setDisplayValue] = useState(value);
-  
+
   // Transform the count for display
   useEffect(() => {
-    const unsubscribe = count.onChange(latest => {
-      if (typeof value === 'number') {
+    const unsubscribe = count.onChange((latest) => {
+      if (typeof value === "number") {
         setDisplayValue(Math.round(latest));
+      } else if (value.toString().includes("%")) {
+        setDisplayValue(`${Math.round(latest)}%`);
       } else {
-        // If value is a currency string, extract the number
-        const numericValue = parseFloat(value.toString().replace(/[^\d.-]/g, ''));
-        if (!isNaN(numericValue)) {
-          setDisplayValue(`${Math.round(latest).toLocaleString('ar-SA')} ريال`);
-        } else if (value.toString().includes('%')) {
-          // If value is a percentage, add the % symbol
-          setDisplayValue(`${Math.round(latest)}%`);
-        } else {
-          setDisplayValue(value);
-        }
+        setDisplayValue(value);
       }
     });
 
@@ -39,21 +37,22 @@ const StatsCard = ({ title, value, icon, trend }: StatsCardProps) => {
   }, [count, value]);
 
   useEffect(() => {
-    // Animate the number counting
-    if (typeof value === 'number') {
+    if (typeof value === "number") {
       animate(count, value, { duration: 1.5, ease: "easeOut" });
-    } else {
-      const numericValue = parseFloat(value.toString().replace(/[^\d.-]/g, ''));
+    } else if (value.toString().includes("%")) {
+      const numericValue = parseFloat(value.toString().replace(/[^\d.-]/g, ""));
       if (!isNaN(numericValue)) {
         animate(count, numericValue, { duration: 1.5, ease: "easeOut" });
       }
+    } else {
+      setDisplayValue(value);
     }
 
     // Animate the card entrance
     controls.start({
       scale: 1,
       opacity: 1,
-      transition: { duration: 0.3, ease: "easeOut" }
+      transition: { duration: 0.3, ease: "easeOut" },
     });
   }, [value, controls, count]);
 
@@ -78,7 +77,7 @@ const StatsCard = ({ title, value, icon, trend }: StatsCardProps) => {
             initial={{ y: -10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className={`flex items-center ${trend.isPositive ? 'text-green-600' : 'text-red-600'}`}
+            className={`flex items-center ${trend.isPositive ? "text-green-600" : "text-red-600"}`}
           >
             <motion.span
               initial={{ scale: 0 }}
@@ -86,7 +85,7 @@ const StatsCard = ({ title, value, icon, trend }: StatsCardProps) => {
               transition={{ duration: 0.3, delay: 0.4 }}
               className="text-sm flex items-center gap-1"
             >
-              {trend.isPositive ? '↑' : '↓'}
+              {trend.isPositive ? "↑" : "↓"}
               <motion.span
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -113,4 +112,4 @@ const StatsCard = ({ title, value, icon, trend }: StatsCardProps) => {
   );
 };
 
-export default StatsCard; 
+export default StatsCard;

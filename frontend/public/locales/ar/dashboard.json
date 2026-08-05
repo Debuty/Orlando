@@ -1,4 +1,80 @@
 {
+  "header": {
+    "title": "لوحة التحكم",
+    "subtitle": "مرحباً بك في لوحة تحكم مدير القرية"
+  },
+  "stats": {
+    "totalChalets": "إجمالي الشاليهات",
+    "activeBookings": "الحجوزات النشطة",
+    "totalRevenue": "الإيرادات",
+    "occupancyRate": "نسبة الإشغال",
+    "currency": "ريال",
+    "error": "تعذر تحميل الإحصائيات"
+  },
+  "charts": {
+    "revenue": "تحليل الإيرادات",
+    "bookings": "تحليل الحجوزات",
+    "occupancy": "معدل الإشغال",
+    "error": "تعذر تحميل الرسوم البيانية",
+    "loading": "جاري تحميل الرسوم..."
+  },
+  "recentBookings": {
+    "title": "الحجوزات الأخيرة",
+    "empty": "لا توجد حجوزات حالياً",
+    "error": "تعذر تحميل الحجوزات",
+    "columns": {
+      "chalet": "الشاليه",
+      "customer": "العميل",
+      "checkIn": "تاريخ الدخول",
+      "checkOut": "تاريخ الخروج",
+      "amount": "المبلغ",
+      "status": "الحالة"
+    },
+    "status": {
+      "confirmed": "مؤكد",
+      "pending": "قيد الانتظار",
+      "cancelled": "ملغي"
+    },
+    "pagination": {
+      "label": "تصفح الحجوزات",
+      "prev": "السابق",
+      "next": "التالي",
+      "pageOf": "صفحة {{page}} من {{totalPages}}"
+    }
+  },
+  "alerts": {
+    "title": "التنبيهات",
+    "empty": "لا توجد تنبيهات",
+    "error": "تعذر تحميل التنبيهات",
+    "markRead": "تحديد كمقروء"
+  },
+  "qrValidate": {
+    "title": "تحقق من رمز QR",
+    "subtitle": "الصق التوكن أو امسح رمز الحجز لفتح الصفحة بهذا الرابط",
+    "tokenLabel": "التوكن",
+    "tokenPlaceholder": "QR-XXXX أو الصق الرابط كاملًا",
+    "submit": "تحقق",
+    "submitting": "جاري التحقق...",
+    "successTitle": "دخول مسموح",
+    "failTitle": "دخول مرفوض",
+    "fields": {
+      "customer": "الضيف",
+      "chalet": "الشاليه",
+      "bookingCode": "رقم الحجز",
+      "checkIn": "الوصول",
+      "checkOut": "المغادرة",
+      "guests": "عدد الضيوف"
+    },
+    "reasons": {
+      "NOT_FOUND": "رمز غير معروف",
+      "USED": "تم استخدام الرمز من قبل",
+      "EXPIRED": "انتهت صلاحية الرمز",
+      "REVOKED": "تم إلغاء الرمز",
+      "BOOKING_CANCELLED": "الحجز ملغي",
+      "UNKNOWN": "فشل التحقق"
+    },
+    "error": "تعذر التحقق من الرمز"
+  },
   "createChalet": {
     "title": "إنشاء شاليه جديد",
     "subtitle": "أدخل بيانات الشاليه وأرسلها للخادم.",

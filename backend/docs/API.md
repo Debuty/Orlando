@@ -139,7 +139,8 @@ Failure: `{ valid: false, reason: "USED" | "EXPIRED" | "REVOKED" | "NOT_FOUND" |
 Monthly series: revenue, bookings, occupancy (last 6–12 months).
 
 ### `GET /dashboard/recent-bookings`
-Latest N bookings with chaletName, customerName, checkIn, checkOut, status, amount.
+Query: `page` (default 1), `size` (default 10, max 50).  
+Returns `{ items, pagination }` with chaletName, customerName, checkIn, checkOut, status, amount.
 
 ### `GET /alerts`
 List alerts (newest first).

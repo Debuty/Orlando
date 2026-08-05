@@ -11,23 +11,14 @@ export interface RecentBooking {
   customerName: string;
   checkIn: string;
   checkOut: string;
-  status: 'pending' | 'confirmed' | 'cancelled';
+  status: string;
   amount: number;
-}
-
-export interface ChaletOwner {
-  id: string;
-  name: string;
-  phoneNumber: string;
-  totalChalets: number;
-  activeBookings: number;
-  revenue: number;
 }
 
 export interface AlertNotification {
   id: string;
-  type: 'info' | 'warning' | 'error';
+  type: string;
   message: string;
   date: string;
   isRead: boolean;
-} 
+}

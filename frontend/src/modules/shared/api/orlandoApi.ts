@@ -235,7 +235,10 @@ export const orlandoApi = createApi({
       providesTags: ['Dashboard'],
     }),
 
-    getRecentBookings: builder.query<{ items: RecentBooking[] }, { limit?: number } | void>({
+    getRecentBookings: builder.query<
+      Paginated<RecentBooking>,
+      { page?: number; size?: number } | void
+    >({
       query: (params) => ({
         url: '/dashboard/recent-bookings',
         method: 'get',

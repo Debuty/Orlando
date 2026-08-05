@@ -26,14 +26,15 @@ const BookingConfirmation = () => {
 
     const generateQRCode = async () => {
       try {
-        const qrPayload =
-          booking.qrCode?.token ??
-          JSON.stringify({
-            bookingCode: booking.bookingCode,
-            chaletId: booking.chaletId,
-            validFrom: booking.checkIn,
-            validTo: booking.checkOut,
-          });
+        const token = booking.qrCode?.token;
+        const qrPayload = token
+          ? `${window.location.origin}/dashboard?token=${encodeURIComponent(token)}`
+          : JSON.stringify({
+              bookingCode: booking.bookingCode,
+              chaletId: booking.chaletId,
+              validFrom: booking.checkIn,
+              validTo: booking.checkOut,
+            });
 
         const qrImage = await QRCode.toDataURL(qrPayload, {
           width: 300,

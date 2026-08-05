@@ -344,7 +344,15 @@
           "request": {
             "method": "GET",
             "header": [{ "key": "Authorization", "value": "Bearer {{adminToken}}" }],
-            "url": "{{baseUrl}}/dashboard/recent-bookings"
+            "url": {
+              "raw": "{{baseUrl}}/dashboard/recent-bookings?page=1&size=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["dashboard", "recent-bookings"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "size", "value": "10" }
+              ]
+            }
           }
         },
         {

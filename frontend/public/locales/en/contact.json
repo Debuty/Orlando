@@ -60,11 +60,14 @@
   "validation": {
     "required": "This field is required",
     "emailInvalid": "Invalid email address",
-    "phoneInvalid": "Invalid phone number"
+    "phoneInvalid": "Invalid phone number",
+    "nameMin": "Name is too short",
+    "messageMin": "Message must be at least 5 characters"
   },
   "messages": {
     "success": "Your message has been sent successfully",
-    "error": "An error occurred while sending the message"
+    "error": "An error occurred while sending the message",
+    "submitting": "Sending..."
   }
 }
 
